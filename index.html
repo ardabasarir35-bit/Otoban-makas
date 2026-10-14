@@ -98,12 +98,20 @@ small{color:var(--mut);line-height:1.35}
 .career-diff-card.active{border-color:#ffba34;background:#3a3322}
 .career-diff-card strong{font-size:20px}.career-diff-card small{display:block;margin-top:4px;color:#c6d4e2}
 .career-diff-card .prize{font-size:19px;color:#53e6a3;font-weight:800;white-space:nowrap}
+</style><style>
+#steeringWheel{display:none;position:absolute;z-index:13;left:12px;bottom:12px;width:clamp(120px,29vh,190px);height:clamp(120px,29vh,190px);border:9px solid #a3acb9;border-radius:50%;background:#18202bdc;box-shadow:0 4px 18px #000a;touch-action:none;align-items:center;justify-content:center;box-sizing:border-box;user-select:none}
+#steeringWheel .spoke{position:absolute;width:80%;height:10px;background:#798697;border-radius:8px;left:10%;top:calc(50% - 5px)}
+#steeringWheel .spoke.vertical{transform:rotate(90deg)}
+#steeringWheel .hub{position:relative;width:33%;height:33%;border:5px solid #aab6c4;border-radius:50%;background:#2e3948;z-index:2;display:flex;align-items:center;justify-content:center}
+#st.play.wheel-control #steeringWheel{display:flex}
+#st.play.wheel-control #pad>div:first-child{display:none}
+#st.layout-portrait.play.wheel-control #steeringWheel{width:clamp(115px,31vw,165px);height:clamp(115px,31vw,165px);bottom:12px;left:9px}
 </style></head><body>
 <div id="rotateHint" style="display:none">📱 Daha geniş oyun alanı için telefonu yatay çevir.</div><div id="st"><canvas id="c" width="960" height="720"></canvas><button id="sirenButton" type="button" aria-label="Polis sireni">🚨<small style="display:block;color:white">SİREN</small></button><button id="hornButton" type="button" aria-label="Korna">📣<small style="display:block;color:#171a20">KORNA</small></button><div id="displayTools"><button id="screenMode" type="button">↔ Yatay / Dikey</button></div><button id="pauseButton" type="button" style="position:absolute;z-index:16;top:9px;right:9px;display:none;background:#141b24e8;border-color:#ffb000">⏸ Duraklat</button><div id="pausePanel" class="ov hide" style="z-index:35;justify-content:center;align-items:center;text-align:center;background:#101820ee"><h1>⏸ OYUN DURAKLATILDI</h1><button class="big" id="resumeGame" style="width:85%">▶ Devam et</button><button id="pauseRestart" style="width:85%">↻ Yeniden başlat</button><button id="pauseMenu" style="width:85%">⌂ Ana menüye dön</button></div><div id="catchOverlay">🚨 POLİS GELİYOR!</div>
-<div id="welcome" class="ov" style="justify-content:center;text-align:center;align-items:center;background:linear-gradient(160deg,#12171d,#303943)"><div style="font-size:4em">🏎️</div><h1 style="font-size:3.5em;color:#ffb000">OTOBAN<br>MAKAS</h1><small>TRAFİĞİN RİTMİNİ YAKALA</small><button class="big" id="welcomePlay" style="width:85%;margin-top:2em">▶ OYNA</button><button id="dailyRewardsOpen" style="width:85%">🎁 GÜNLÜK ÖDÜLLER & ÇARK</button><button id="shopOpen" style="width:85%">🛒 MAĞAZA • ALTINLA PARA AL</button><button id="missionsOpen" style="width:85%">🎯 GÖREVLER</button><button id="statsOpen" style="width:85%">📊 İSTATİSTİKLER</button><button id="leaderOpen" style="width:85%">🏆 LİDERLİK TABLOSU</button><div style="width:85%;display:flex;align-items:center;gap:8px"><small>🔊 Ses</small><input id="volume" type="range" min="0" max="1.5" step="0.1" value="1" style="flex:1"></div><small>Yeni garaj • yeni araçlar • puan sistemi</small></div>
+<div id="welcome" class="ov" style="justify-content:center;text-align:center;align-items:center;background:linear-gradient(160deg,#12171d,#303943)"><div style="font-size:4em">🏎️</div><h1 style="font-size:3.5em;color:#ffb000">OTOBAN<br>MAKAS</h1><small>TRAFİĞİN RİTMİNİ YAKALA</small><button class="big" id="welcomePlay" style="width:85%;margin-top:2em">▶ OYNA</button><button id="welcomeGarage" style="width:85%">🚗 GARAJ • ARAÇLARIM</button><button id="dailyRewardsOpen" style="width:85%">🎁 GÜNLÜK ÖDÜLLER & ÇARK</button><button id="shopOpen" style="width:85%">🛒 MAĞAZA • ALTINLA PARA AL</button><button id="missionsOpen" style="width:85%">🎯 GÖREVLER</button><button id="statsOpen" style="width:85%">📊 İSTATİSTİKLER</button><button id="leaderOpen" style="width:85%">🏆 LİDERLİK TABLOSU</button><div style="width:85%;display:flex;align-items:center;gap:8px"><small>🔊 Ses</small><input id="volume" type="range" min="0" max="1.5" step="0.1" value="1" style="flex:1"></div><small>Yeni garaj • yeni araçlar • puan sistemi</small></div>
 <div id="modeSelect" class="ov hide" style="z-index:60;background:#101720;overflow:hidden;padding:0">
 <div class="mode-grid">
-<button class="mode-tile" data-choice="career"><span class="mode-icon">🏁</span><b>KARİYER</b><small>250 bölüm · 25 araç</small></button>
+<button class="mode-tile" data-choice="career"><span class="mode-icon">🏁</span><b>KARİYER</b><small>250 bölüm · 10’arlı sayfalar</small></button>
 <button class="mode-tile" data-choice="endless"><span class="mode-icon">♾️</span><b>SINIRSIZ</b><small>Özgür sürüş</small></button>
 <button class="mode-tile" data-choice="timed"><span class="mode-icon">⏱️</span><b>SÜREYE KARŞI</b><small>Saatleri topla</small></button>
 <button class="mode-tile" data-choice="police"><span class="mode-icon">🚨</span><b>POLİS KOVALAMACASI</b><small>10 km kaçış</small></button>
@@ -114,9 +122,9 @@ small{color:var(--mut);line-height:1.35}
 <button class="big" id="tankStartNow" style="width:min(85vw,360px)">▶ BAŞLAT</button>
 <button id="tankReadyBack">◀ MODLARA DÖN</button></div><div id="shopPanel" class="ov hide" style="background:#161b22;align-items:center;text-align:center;overflow-y:auto;padding:20px;gap:13px"><h1>🛒 MAĞAZA</h1><p id="shopBalance" style="font-weight:bold"></p><small>Oyun içi altınlarını oyun parasına dönüştür. Gerçek para kullanılmaz.</small><div id="shopOffers" style="width:min(95%,470px);display:grid;gap:12px"></div><p id="shopMessage" aria-live="polite" style="min-height:22px;color:#ffda71"></p><button id="shopBack" class="big" style="width:85%;margin-top:auto">◀ ANA EKRAN</button></div><div id="rewardsPanel" class="ov hide" style="background:#161b22;align-items:center;text-align:center;overflow-y:auto;padding:18px;gap:12px"><h1>🎁 GÜNLÜK ÖDÜLLER</h1><div id="rewardBalance"></div><h2>7 Günlük Giriş Takvimi</h2><div id="loginDays" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;width:100%;max-width:430px"></div><div id="loginStatus" style="font-size:.85em"></div><button class="big" id="claimLogin">🎁 Giriş ödülünü al</button><h2>🎡 Günlük Şans Çarkı</h2><small>Her gün 1 ücretsiz çevirme • 2 büyük ödül, 6 küçük ödül</small><div style="position:relative;width:min(60vw,230px);height:min(60vw,230px);margin:8px auto"><div style="position:absolute;z-index:2;top:-14px;left:calc(50% - 13px);width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-top:29px solid white;filter:drop-shadow(0 2px 2px #000)"></div><div id="wheelDisc" style="width:100%;height:100%;border-radius:50%;border:7px solid #e6c265;box-shadow:0 0 24px #ffb00044;transition:transform 3.8s cubic-bezier(.12,.72,.08,1);background:conic-gradient(#e5ad26 0deg 45deg,#344a68 45deg 90deg,#32a88c 90deg 135deg,#a465bd 135deg 180deg,#e5ad26 180deg 225deg,#344a68 225deg 270deg,#32a88c 270deg 315deg,#a465bd 315deg 360deg);display:flex;align-items:center;justify-content:center"><div style="border-radius:50%;background:#19232f;padding:10px;border:3px solid #f4d278;font-weight:bold">OTOBAN<br>MAKAS</div></div></div><div id="wheelLegend" style="font-size:.8em;line-height:1.8;max-width:440px"></div><button class="big" id="spinWheel">🎡 ÜCRETSİZ ÇEVİR</button><div id="wheelStatus" aria-live="polite"></div><button id="rewardsBack" style="margin-top:8px">◀ ANA EKRAN</button></div><div id="infoPanel" class="ov hide"><h1 id="infoTitle"></h1><div id="infoBody" style="line-height:1.8"></div><button id="infoBack" class="big" style="margin-top:auto">◀ ANA EKRAN</button></div><div id="menu" class="ov hide">
 <div class="row"><h1>Otoban Makas</h1><span class="mny" id="mn"></span></div>
-<div id="garageStep"><h2>1 / 3 — GARAJ</h2><small>Aracını seç, satın al ve geliştir.</small></div>
+<div id="garageStep"><button id="careerGarageReturn" class="hide" style="width:100%;margin-bottom:10px">◀ KARİYER BÖLÜMLERİNE DÖN</button><h2>1 / 3 — GARAJ</h2><small>Aracını seç, satın al ve geliştir.</small></div>
 <div id="mapStep" class="hide"><h2>2 / 3 — HARİTA</h2><h2>Arka plan</h2><div class="row" id="bis"></div><h2>Mevsim</h2><div class="row" id="sns"></div><h2>Günün saati</h2><div class="row" id="times" style="flex-wrap:wrap"></div></div>
-<div id="raceStep" class="hide"><h2>3 / 3 — YARIŞ AYARLARI</h2><h2>Zorluk</h2><div class="row" id="dfs"></div><h2>Yol akışı</h2><div class="row"><button class="md" data-m="2">2 gidiş + 2 geliş</button><button class="md" data-m="4">4 gidiş</button></div><div class="row hide" id="gameModes" style="flex-wrap:wrap"></div><h2>Vites</h2><div class="row" id="gvs"></div><small>Manuel vites ve zorluk ödülleri artık dengelendi.</small></div>
+<div id="raceStep" class="hide"><h2>3 / 3 — YARIŞ AYARLARI</h2><h2>Zorluk</h2><div class="row" id="dfs"></div><h2>Yol akışı</h2><div class="row"><button class="md" data-m="2">2 gidiş + 2 geliş</button><button class="md" data-m="4">4 gidiş</button></div><div class="row hide" id="gameModes" style="flex-wrap:wrap"></div><h2>Kontrol tipi</h2><div class="row" id="controlOptions"><button type="button" data-control="buttons" class="df">◀ ▶ Tuşlu</button><button type="button" data-control="wheel" class="df">◉ Direksiyon</button></div><h2>Vites</h2><div class="row" id="gvs"></div><small>Manuel vites ve zorluk ödülleri artık dengelendi.</small></div>
 <div id="garageContent"><div class="gar"><div style="display:flex;flex-direction:column;align-items:center;gap:8px"><canvas id="pv" width="120" height="190"></canvas><button id="openPaint" type="button">🎨 Renk değişimi</button></div>
 <div class="sts"><div class="nm" id="cn"></div><div id="sb"></div><div class="row" style="margin-top:auto"><button id="pr">◀</button><button id="ac" style="flex:1"></button><button id="nx">▶</button></div></div></div>
 </div><div id="paintModal" class="ov hide" style="z-index:50;background:#161b22;justify-content:center;align-items:center;text-align:center"><h1>🎨 ARAÇ BOYAMA</h1><small id="paintCarName"></small><canvas id="paintPreview" width="160" height="205" style="background:#292e36;border-radius:12px;max-height:30vh"></canvas><div id="paintChoices" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:350px"></div><small>Her renk değişimi ₺50 • Onaylamadan ücret alınmaz.</small><div class="row" style="width:100%;max-width:380px"><button id="paintCancel" style="flex:1">◀ Vazgeç</button><button id="paintConfirm" class="big" style="flex:1">Onayla ₺50</button></div><small id="paintError" style="color:#ff857e"></small></div><small id="helpText">Yön tuşları ya da WASD ile sür. Yukarı: gaz, aşağı: fren. 70 km/h altında çarparsan araç hasar alır ama yarış sürer; daha hızlıysan kaza yaparsın. Bariyere çarpmak hızı yarıya düşürür, %25 can götürür; araç bariyerin içinden geçerek devam eder. Can sıfırlanırsa sürüş biter. Nitro her araca garajdan ayrı ve kalıcı olarak satın alınır. Takılıysa Boşluk ya da Shift ile kullanılır; her makas nitroyu biraz doldurur. Kışın yol kaygan ama kazanç yüksek. Manuel vitesle E: vites yükselt, Q: vites düşür. Garajda her istatistiği +4 seviyeye kadar yükseltebilirsin. Başka araçlara yakından geçip makas atarak para kazan, hızlı ve ters şeritte kazanç daha yüksek.</small>
@@ -126,10 +134,11 @@ small{color:var(--mut);line-height:1.35}
 <div style="width:min(96vw,620px);margin:0 auto;display:flex;flex-direction:column;gap:12px">
 <h1 style="text-align:center">🏁 KARİYER MODU</h1>
 <div id="careerStageScreen">
-<div class="row" style="justify-content:space-between;align-items:center"><button id="careerPrev">◀ Önceki</button><b id="careerGroupTitle">ARAÇ 1 / 25</b><button id="careerNext">Sonraki ▶</button></div>
+<div class="row" style="justify-content:space-between;align-items:center"><button id="careerPrev">◀ Önceki</button><b id="careerGroupTitle">BÖLÜM 1–10 / 250</b><button id="careerNext">Sonraki ▶</button></div>
 <div id="careerStageGrid" class="career-stage-grid"></div>
 <div id="careerDetails" class="career-detail"></div>
 <button id="careerChoose" class="big" style="width:100%;margin-top:10px">ZORLUK SEÇ ▶</button>
+<button id="careerGarage" style="width:100%;margin-top:8px">🚘 GARAJA GİT · ARAÇ AL / YÜKSELT</button>
 <button id="careerClose" style="width:100%;margin-top:8px">◀ MOD SEÇİMİNE DÖN</button>
 </div>
 <div id="careerDifficultyScreen" class="hide">
@@ -142,8 +151,8 @@ small{color:var(--mut);line-height:1.35}
 
 <div id="over" class="ov hide" style="justify-content:center;text-align:center">
 <h1 id="finishTitle" style="color:var(--red)">Kaza!</h1><div id="ot"></div>
-<button id="musicToggle">♫ Müzik: Açık</button><button class="big" id="again">Tekrar oyna</button><button id="goldRestart">🪙 5 Altınla Yeniden Başla</button><button id="gar">Garaja dön</button></div>
-<div id="gp"><button data-g="1">Vites +</button><button data-g="-1">Vites −</button></div><div id="pad"><div><button data-k="left">◀</button><button data-k="right">▶</button></div><div><button data-k="nit">Nitro</button><button data-k="down">Fren</button><button data-k="up">Gaz</button></div></div>
+<button id="musicToggle">♫ Müzik: Açık</button><button class="big" id="again">Tekrar oyna</button><button id="goldRestart">🪙 5 Altınla Yeniden Başla</button><button id="gar">◀ Oyun modlarına dön</button></div>
+<div id="steeringWheel" role="slider" aria-label="Direksiyon" aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"><div class="spoke"></div><div class="spoke vertical"></div><div class="hub">●</div></div><div id="gp"><button data-g="1">Vites +</button><button data-g="-1">Vites −</button></div><div id="pad"><div><button data-k="left">◀</button><button data-k="right">▶</button></div><div><button data-k="nit">Nitro</button><button data-k="down">Fren</button><button data-k="up">Gaz</button></div></div>
 </div>
 <script>
 const OX=60,W=440,H=720,K=3.2,RL=20,PY=570,$=id=>document.getElementById(id);
@@ -183,25 +192,65 @@ const ORDER=CARS.map((_,i)=>i).sort((a,b)=>CARS[a].p-CARS[b].p||a-b);
 // 25 araç × 10 bölüm: eski araç kimliklerini ve kayıtları korur.
 let careerRun=null;
 const CAREER_DIFFICULTY=[{name:'Kolay',time:1.22,clock:25,reward:.75},{name:'Normal',time:1,clock:20,reward:1},{name:'Zor',time:.88,clock:15,reward:1.5}];
-function careerStage(n){const pos=Math.max(1,Math.min(250,n))-1,slot=Math.floor(pos/10),step=pos%10+1,idx=ORDER[slot],car=CARS[idx];
- // 1-5 yükseltmesiz, 6-10 gittikçe daha yüksek motor ve şanzıman gereksinimi.
- const baseTop=effCareerTop(idx,step);
- const targetSpeed=baseTop*(.51+.037*(step-1));
- const km=+(2+(step-1)*.5+(slot%4)*.15).toFixed(2);
- const seconds=Math.ceil(km/targetSpeed*3600);
- const season=step===10||step===7?3:step===4?2:step===6?0:1;
- return {n,slot,step,idx,car,km,seconds,season,map:(slot+Math.floor(step/4))%4,
- reward:Math.round((140+slot*75+step*50)*10)/10,targetSpeed};
+// Süreler gerçek gazlanma denkleminin 0.05 sn'lik simülasyonuyla hesaplanır.
+// Araç satın alımı ve yükseltme ücretleri kariyer ödüllerinin bütçesine dahildir.
+function careerFullThrottle(i,km,motor,transmission,season){
+ const c=CARS[i],top=c.top*.85*(1+.07*transmission),acc=c.acc*(1+.07*motor);
+ const grip=[.9,1,.8,.5][season],dt=.05;let speed=0,metres=0,secs=0;
+ while(metres<km*1000&&secs<2500){
+  speed=Math.min(top,speed+acc*(.7+.3*grip)*(1-speed/top*.55)*dt);
+  metres+=speed/3.6*dt;secs+=dt;
+ }
+ return secs;
 }
-function effCareerTop(i,step){
- const c=CARS[i];return c.top*.85*(1+(step<=5?0:(step-5)*.07));
+function careerUpgradeBudget(i){
+ let total=0;
+ for(let k=0;k<4;k++)total+=upc(i,k)*2; // motor ve şanzıman
+ return total;
+}
+function careerStage(n){
+ const pos=Math.max(1,Math.min(250,n))-1,slot=Math.floor(pos/10),step=pos%10+1,idx=ORDER[slot],car=CARS[idx];
+ const km=+(2+(step-1)*.5+(slot%4)*.15).toFixed(2);
+ const season=step===10||step===7?3:step===4?2:step===6?0:1;
+ const next=ORDER[slot+1],nextCost=next===undefined?Math.round(car.p*.15):CARS[next].p;
+ const budget=nextCost+careerUpgradeBudget(idx)*1.2;
+ const weight=1+.16*(step-1),weightSum=10+.16*45;
+ const reward=Math.max(75,Math.ceil(budget*1.42*weight/weightSum/10)*10);
+ return {n,slot,step,idx,car,km,season,map:(slot+Math.floor(step/4))%4,reward};
+}
+function careerTiming(q,diff){
+ // Bölüm hedefi seçilen araca bağlı değildir. Her zorluk aynı temel süreyi kullanır.
+ const step=q.step;
+ const reference=careerFullThrottle(q.idx,q.km,step<=5?0:Math.min(4,step-5),step<=5?0:Math.min(4,step-5),q.season);
+ const stock=careerFullThrottle(q.idx,q.km,0,0,q.season);
+ const maxTuned=careerFullThrottle(q.idx,q.km,4,4,q.season);
+ // Makas ve kronometreler ekstra avantajdır; süre hesabından garanti alınmış gibi düşülmez.
+ // Böylece bir saati kaçırmak bölümü matematiksel olarak imkânsız yapmaz.
+ const normal=Math.max(28,Math.ceil(reference*(step<=5?1.26:step<=8?1.17:1.10)));
+ const seconds=diff===0?Math.ceil(normal*1.22):diff===2?Math.max(15,Math.floor(normal*.88)):normal;
+ // İlk saat 18. saniyede, sonraki saatler en az 35 saniye sürüşten sonra gelir.
+ // Görüntülenen azami saat sayısı, başlangıç süresiyle erişilebilir olmalıdır.
+ const clocks=seconds<24?0:Math.min(3,1+Math.floor(Math.max(0,seconds-24)/35));
+ return {seconds,stock:Math.round(stock),tuned:Math.round(reference),required:step<=5?0:Math.min(4,step-5),clock:CAREER_DIFFICULTY[diff].clock,clocks};
+}
+function careerAccessibleClockLane(){
+ // Trafik araçlarının bulunmadığı şeritleri tercih et; gerekirse en uzak aracı seç.
+ let best=0,bestScore=-1e9;
+ for(let l=0;l<4;l++){
+  const x=LX(l);let nearest=1e4;
+  for(const c of cars){if(Math.abs(c.x-x)<55)nearest=Math.min(nearest,Math.abs(c.y-(-45)));}
+  for(const rw of roadWorks){if(Math.abs(rw.x-x)<55)nearest=Math.min(nearest,Math.abs(rw.y-(-45)));}
+  const score=nearest-Math.abs(x-pl.x)*.13;
+  if(score>bestScore){bestScore=score;best=l;}
+ }
+ return best;
 }
 function careerView(){
  const c=S.career;
  c.selected=Math.max(1,Math.min(250,Number(c.selected)||c.unlocked||1));
  const n=c.selected,q=careerStage(n),group=q.slot;
- const owned=S.own.includes(q.idx),unlocked=n<=c.unlocked;
- $('careerGroupTitle').textContent='ARAÇ '+(group+1)+' / 25';
+ const unlocked=n<=c.unlocked;
+ $('careerGroupTitle').textContent='BÖLÜM '+(group*10+1)+'–'+(group*10+10)+' / 250';
  $('careerPrev').disabled=group===0;
  $('careerNext').disabled=group===24;
  $('careerStageGrid').innerHTML=Array.from({length:10},(_,i)=>{
@@ -209,17 +258,17 @@ function careerView(){
  return '<button class="career-stage'+(k===n?' active':'')+(locked?' locked':'')+'" data-careerlevel="'+k+'"><strong>'+(locked?'🔒 ':c.cleared[k]?'✓ ':'')+k+'</strong><small>'+SEA[a.season].n+'</small></button>'
  }).join('');
  const difficulty=c.difficulty??1,cd=CAREER_DIFFICULTY[difficulty];
- const seconds=Math.ceil(q.seconds*cd.time);
- $('careerDetails').innerHTML='<b>🏁 BÖLÜM '+n+' / 250</b><p>🚘 '+q.car.n+' · Araç etabı '+q.step+'/10</p><p>🌤️ Mevsim: <b>'+SEA[q.season].n+'</b> · 🛣️ Yol: '+BIO[q.map]+'</p><p>📍 Hedef: '+q.km.toFixed(2)+' km · ⏱️ Normal süre: '+Math.floor(q.seconds/60)+':'+String(q.seconds%60).padStart(2,'0')+'</p><p>'+(unlocked?(owned?'✅ Bölüm oynanabilir':'🔒 Bu aracı garajdan satın almalısın'):'🔒 Önceki bölümleri tamamlamalısın')+'</p>';
- $('careerChoose').disabled=!unlocked||!owned;
+ const seconds=careerTiming(q,1).seconds;
+ $('careerDetails').innerHTML='<b>🏁 BÖLÜM '+n+' / 250</b><p>🌤️ Mevsim: <b>'+SEA[q.season].n+'</b> · 🛣️ Yol: '+BIO[q.map]+'</p><p>📍 Hedef: '+q.km.toFixed(2)+' km · ⏱️ Normal süre: '+Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0')+'</p><p>'+(unlocked?'✅ Bölüm oynanabilir · Garajdan istediğin aracı seçebilirsin':'🔒 Önceki bölümleri tamamlamalısın')+'</p>';
+ $('careerChoose').disabled=!unlocked;
 }
 function careerDifficultyView(){
  const q=careerStage(S.career.selected||1),difficulty=S.career.difficulty??1;
  $('careerDiffTitle').textContent='BÖLÜM '+q.n+' · ZORLUK SEÇ';
- $('careerDiffSummary').innerHTML='🚘 <b>'+q.car.n+'</b><p>🌤️ '+SEA[q.season].n+' · '+BIO[q.map]+' · '+q.km.toFixed(2)+' km</p>';
+ $('careerDiffSummary').innerHTML='🏁 <b>Serbest araç seçimi</b><p>🌤️ '+SEA[q.season].n+' · '+BIO[q.map]+' · '+q.km.toFixed(2)+' km</p>';
  $('careerDifficulty').innerHTML=CAREER_DIFFICULTY.map((d,i)=>{
- const secs=Math.ceil(q.seconds*d.time),prize=Math.round(q.reward*d.reward);
- return '<button class="career-diff-card'+(difficulty===i?' active':'')+'" data-careerdiff="'+i+'"><span><strong>'+['🟢 KOLAY','🟡 ORTA','🔴 ZOR'][i]+'</strong><small>⏱️ '+Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')+' · Saat +'+d.clock+' sn</small></span><span class="prize">$'+prize.toLocaleString('tr-TR')+'</span></button>'
+ const timing=careerTiming(q,i),secs=timing.seconds,prize=Math.round(q.reward*d.reward);
+ return '<button class="career-diff-card'+(difficulty===i?' active':'')+'" data-careerdiff="'+i+'"><span><strong>'+['🟢 KOLAY','🟡 ORTA','🔴 ZOR'][i]+'</strong><small>⏱️ '+Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')+' · Saat +'+d.clock+' sn (en fazla '+timing.clocks+')</small></span><span class="prize">$'+prize.toLocaleString('tr-TR')+'</span></button>'
  }).join('');
 }
 function openCareer(){
@@ -233,15 +282,16 @@ function openCareer(){
  careerView();
 }
 function closeCareer(){
+ S.career.returnToCareer=false;
  $('careerPanel').classList.add('hide');
  $('modeSelect').classList.remove('hide');
 }
 function startCareer(){
  const q=careerStage(S.career.selected||1);
- if(q.n>S.career.unlocked||!S.own.includes(q.idx)){careerView();return}
+ if(q.n>S.career.unlocked){careerView();return}
  const diff=S.career.difficulty??1,cd=CAREER_DIFFICULTY[diff];
- careerRun={...q,diff,clock:cd.clock,initial:Math.ceil(q.seconds*cd.time),startMoney:S.money};
- S.sel=q.idx;S.sea=q.season;S.bio=q.map;S.gameMode='career';S.diff=diff;
+ careerRun={...q,diff,clock:cd.clock,initial:careerTiming(q,diff).seconds,clockLimit:careerTiming(q,diff).clocks,clockSpawned:0,startMoney:S.money};
+ S.sea=q.season;S.bio=q.map;S.gameMode='career';S.diff=diff;
  save();
  $('careerPanel').classList.add('hide');
  $('modeSelect').classList.add('hide');
@@ -262,7 +312,7 @@ let S;try{S=JSON.parse(localStorage.getItem('om1'))}catch(e){}
 S=S&&S.own?S:{money:0,own:[0],sel:0,mode:'2'};
 S.career=S.career||{unlocked:1,cleared:{},bestDifficulty:{}};
 S.career.cleared=S.career.cleared||{};S.career.bestDifficulty=S.career.bestDifficulty||{};S.career.unlocked=Math.max(1,Math.min(250,S.career.unlocked||1));
-S.diff=S.diff??1;S.sea=S.sea??1;S.man=S.man||0;S.bio=S.bio||0;S.up=S.up||{};S.nitroOwned=S.nitroOwned||{};S.paint=S.paint||{};S.gameMode=S.gameMode||'endless';S.stats=S.stats||{};S.missions=S.missions||{};S.dayTime=['day','evening','night','morning'].includes(S.dayTime)?(S.dayTime==='night'?'night':'morning'):(S.dayTime||'cycle');S.volume=S.volume??1;S.gold=S.gold||0;S.challengeData=S.challengeData||{};S.localRecords=S.localRecords||[];S.dailyReward=S.dailyReward||{lastClaim:'',streak:0,lastSpin:'',spinAngle:0};S.lastTankDay=S.lastTankDay||'';S.lastTankAt=S.lastTankAt||0;S.achievements=S.achievements||{};S.lifetimePasses=S.lifetimePasses||0;S.weeklyEvent=S.weeklyEvent||{key:'',passes:0,claimed:false};
+S.control=S.control==='wheel'?'wheel':'buttons';S.diff=S.diff??1;S.sea=S.sea??1;S.man=S.man||0;S.bio=S.bio||0;S.up=S.up||{};S.nitroOwned=S.nitroOwned||{};S.paint=S.paint||{};S.gameMode=S.gameMode||'endless';S.stats=S.stats||{};S.missions=S.missions||{};S.dayTime=['day','evening','night','morning'].includes(S.dayTime)?(S.dayTime==='night'?'night':'morning'):(S.dayTime||'cycle');S.volume=S.volume??1;S.gold=S.gold||0;S.challengeData=S.challengeData||{};S.localRecords=S.localRecords||[];S.dailyReward=S.dailyReward||{lastClaim:'',streak:0,lastSpin:'',spinAngle:0};S.lastTankDay=S.lastTankDay||'';S.lastTankAt=S.lastTankAt||0;S.achievements=S.achievements||{};S.lifetimePasses=S.lifetimePasses||0;S.weeklyEvent=S.weeklyEvent||{key:'',passes:0,claimed:false};
 if(!S.lastTankAt&&S.lastTankDay===new Date().toLocaleDateString('sv-SE'))S.lastTankAt=new Date().setHours(0,0,0,0);
 // Takvim bazlı görevler: yerel cihaz saatiyle gün/hafta değişir.
 const dayKey=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
@@ -487,7 +537,7 @@ let preCrashSave=null;let roadWorks=[], nextRoadWork=Infinity, runStars=0;let ho
 let tankCrushes=0;let bonusClock=null, clockRoadSeconds=0, nextClockAt=40;let bonusStar=null, nextStarDistance=0;let policeCar=null,slowPoliceSeconds=0,catchAnimation=0,catchCause='',policeCatchX=0;let policeStartMoney=0;let distanceScore=0;let score=0,passes=0,bestCombo=0,remaining=60,policeHeat=0,reversePasses=0,finishReason='Kaza!';let so=0,sideScroll=0,N=1,gear=1,wx=[],st='menu',P=0,pl,cars=[],off=0,t=0,el=0,spT=0,earned=0,dist=0,combo=0,comboT=0,pops=[],parts=[],shake=0,bi=S.sel,k={};
 const COLS=['#9aa3ad','#d9d4c5','#5b6f8a','#7a4e4e','#4d6b57','#c9a24d','#3b3f46','#a8b8c9'],rnd=a=>a[Math.random()*a.length|0];
 function spawn(y0){const m2=S.mode=='2',l=Math.random()*4|0,dir=(m2&&l<2)?-1:1,r=Math.random();
-const type=r<.10?'mini':r<.31?'sedan':r<.52?'hatch':r<.66?'van':r<.79?'kamyonet':r<.9?'motor':'tir',d=TY[type];
+const type=r<.10?'mini':r<.31?'sedan':r<.52?'hatch':r<.66?'van':r<.79?'kamyonet':r<.9?'motor':'tir',baseD=TY[type],d=type==='tir'?[53,150]:[Math.round(baseD[0]*1.06),Math.round(baseD[1]*1.035)];
 let sp=dir<0?70+Math.random()*30:m2?(l==2?85:65)+Math.random()*15:[105,88,72,58][l]+Math.random()*12;
 if(type=='tir')sp*=.75;if(type=='van')sp*=.9;if(type=='kamyonet')sp*=.88;if(type=='motor')sp*=1.23;sp*=.8;
 const y=y0!==undefined?y0:(P-dir*sp>=0?-d[1]-30:H+d[1]+30);
@@ -497,12 +547,12 @@ if(dir>0&&S.mode!=='2'){
 }
 if(cars.some(c=>Math.abs(c.x-LX(l))<60&&Math.abs(c.y-y)<(c.h+d[1])/2+125))return;
 if(Math.abs(LX(l)-pl.x)<70&&Math.abs(y-pl.y)<(d[1]+pl.h)/2+180)return;
-cars.push({type,w:d[0],h:d[1],x:LX(l),y,l,dir,base:sp,sp,col:rnd(COLS),col2:rnd(['#d9d9d2','#8fa3b5','#b5a58f']),sd:0,sigT:0,mv:false,tl:2+Math.random()*6,tl2:l,near:false})}
+cars.push({type,w:d[0],h:d[1],laneOffset:(Math.random()-.5)*18,x:LX(l)+(Math.random()-.5)*16,y,l,dir,base:sp,sp,col:rnd(COLS),col2:rnd(['#d9d9d2','#8fa3b5','#b5a58f']),sd:0,sigT:0,mv:false,tl:2+Math.random()*6,tl2:l,near:false})}
 function clear(a,tx){return !cars.some(b=>b!==a&&Math.abs(b.x-tx)<60&&Math.abs(b.y-a.y)<(a.h+b.h)/2+90)&&!(Math.abs(pl.x-tx)<60&&Math.abs(pl.y-a.y)<(a.h+pl.h)/2+130)}
 const pop=(s,x,y,c)=>pops.push({s,x,y,l:1.2,c});
 function sparks(x,y,n=2,c='#ffb000'){for(let i=0;i<n;i++)parts.push({x,y:y+(Math.random()-.5)*50,vx:(Math.random()-.5)*160,vy:(Math.random()-.5)*160,l:.4,c,s:2})}
-function start(){preCrashSave=null;policeStartMoney=S.money;if(S.gameMode==='tank'){if(tankRemaining()){alert('🪖 Tank modu için '+Math.ceil(tankRemaining()/60000)+' dakika kaldı.');return;}S.lastTankAt=Date.now();S.lastTankDay=dayKey();save();}audioInit();beep(523,.14);const c=CARS[S.sel],d=S.gameMode==='tank'?[65,100]:TY[c.type];pl={x:S.mode=='2'?LX(3):LX(2),y:PY,w:d[0],h:d[1],vx:0,dmg:0,inv:0,brake:false};
-setSiren(false);$('st').classList.toggle('police-player',isPolice()&&S.gameMode!=='tank');P=0;hornCooldown=0;hornPulse=0;tankCrushes=0;runStars=0;roadWorks=[];nextRoadWork=650+Math.random()*550;bonusStar=null;nextStarDistance=420+Math.random()*260;bonusClock=null;clockRoadSeconds=0;nextClockAt=40;policeCar=S.gameMode==='police'?{x:pl.x,y:pl.y+320,speed:0}:null;slowPoliceSeconds=0;catchAnimation=0;catchCause='';$('catchOverlay').classList.remove('active');score=0;distanceScore=0;passes=0;bestCombo=0;remaining=S.gameMode==='career'&&careerRun?careerRun.initial:60;policeHeat=0;reversePasses=0;finishReason="Kaza!";N=hasNitro(S.sel)?1:0;wx=[];cars=[];earned=0;dist=0;combo=0;comboT=0;pops=[];parts=[];el=0;spT=.5;shake=0;
+function start(){syncControls();wheelSteer=0;preCrashSave=null;policeStartMoney=S.money;if(S.gameMode==='tank'){if(tankRemaining()){alert('🪖 Tank modu için '+Math.ceil(tankRemaining()/60000)+' dakika kaldı.');return;}S.lastTankAt=Date.now();S.lastTankDay=dayKey();save();}audioInit();beep(523,.14);const c=CARS[S.sel],d=S.gameMode==='tank'?[65,100]:TY[c.type];pl={x:S.mode=='2'?LX(3):LX(2),y:PY,w:d[0],h:d[1],vx:0,dmg:0,inv:0,brake:false};
+setSiren(false);$('st').classList.toggle('police-player',isPolice()&&S.gameMode!=='tank');P=0;hornCooldown=0;hornPulse=0;tankCrushes=0;runStars=0;roadWorks=[];nextRoadWork=650+Math.random()*550;bonusStar=null;nextStarDistance=420+Math.random()*260;bonusClock=null;clockRoadSeconds=0;nextClockAt=S.gameMode==='career'?18:40;policeCar=S.gameMode==='police'?{x:pl.x,y:pl.y+320,speed:0}:null;slowPoliceSeconds=0;catchAnimation=0;catchCause='';$('catchOverlay').classList.remove('active');score=0;distanceScore=0;passes=0;bestCombo=0;remaining=S.gameMode==='career'&&careerRun?careerRun.initial:60;policeHeat=0;reversePasses=0;finishReason="Kaza!";N=hasNitro(S.sel)?1:0;wx=[];cars=[];earned=0;dist=0;combo=0;comboT=0;pops=[];parts=[];el=0;spT=.5;shake=0;
 // Başlangıçta yol boş: ilk trafik, oyuncu 100 metre ilerledikten sonra üretilir.
 st='play';gear=1;autoGear=1;rpmSmooth=900;$('st').classList.toggle('man',!!S.man);$('menu').classList.add('hide');$('over').classList.add('hide');$('st').classList.add('play');$('pauseButton').style.display='block';$('pausePanel').classList.add('hide');document.querySelector('#pad [data-k="nit"]').style.display=hasNitro(S.sel)?'':'none'}
 function policeCatch(cause){
@@ -525,19 +575,19 @@ function crash(reason='Kaza!'){if(st!=='play')return;const careerWon=S.gameMode=
  }else reason='⌛ Kariyer başarısız • Ödül: $0';
  }
  const policeWon=S.gameMode==='police'&&dist>=10000;const policeLost=S.gameMode==='police'&&!policeWon;if(S.gameMode==='police'){S.money=policeStartMoney;earned=0;if(policeWon){S.money+=750;earned=750;reason='🏁 Polislerden kaçtın! 10 KM • +$750';}else{reason='🚨 Polis yakaladı! Kazanç: $0';}}$('pauseButton').style.display='none';finishReason=reason;preCrashSave=(S.gameMode!=='career'&&!policeLost&&reason==='Kaza!'&&S.gameMode!=='tank')?JSON.stringify(S):null;beep(130,.4,.08);st='over';if(reason==='Kaza!')sparks(pl.x,pl.y,40,'#ff7a30');shake=reason==='Kaza!'?16:0;$('st').classList.remove('play');
-if(!policeLost&&S.gameMode!=='career')recordChallengeProgress({passes,km:dist/1000,score:Math.floor(score),reverse:reversePasses,runs:1,stars:runStars});S.localRecords.push({mode:S.gameMode,score:Math.floor(score),km:+(dist/1000).toFixed(2),date:dayKey()});S.localRecords.sort((a,b)=>b.score-a.score);S.localRecords=S.localRecords.slice(0,20);S.money=Math.floor(S.money);S.best=Math.max(S.best||0,score);const stats=S.stats[S.gameMode]||(S.stats[S.gameMode]={runs:0,passes:0,km:0,points:0,money:0,best:0,reverse:0});stats.runs++;stats.passes+=passes;stats.km+=dist/1000;stats.points+=Math.floor(score);stats.money+=Math.floor(earned);stats.reverse+=reversePasses;stats.best=Math.max(stats.best,Math.floor(score));
+if(!policeLost&&S.gameMode!=='career')recordChallengeProgress({passes,km:dist/1000,score:Math.floor(score),reverse:reversePasses,runs:1,stars:runStars});if(S.gameMode!=='career')S.localRecords.push({mode:S.gameMode,score:Math.floor(score),km:+(dist/1000).toFixed(2),date:dayKey()});S.localRecords.sort((a,b)=>b.score-a.score);S.localRecords=S.localRecords.slice(0,20);S.money=Math.floor(S.money);S.best=Math.max(S.best||0,score);const stats=S.stats[S.gameMode]||(S.stats[S.gameMode]={runs:0,passes:0,km:0,points:0,money:0,best:0,reverse:0});stats.runs++;stats.passes+=passes;stats.km+=dist/1000;stats.points+=Math.floor(score);stats.money+=Math.floor(earned);stats.reverse+=reversePasses;stats.best=Math.max(stats.best,Math.floor(score));
 const ms=[{id:'pass10',need:10,label:'Tek yarışta 10 makas',reward:150,progress:passes},{id:'km5',need:5,label:'Tek yarışta 5 km',reward:250,progress:dist/1000},{id:'score3000',need:3000,label:'3000 puan kazan',reward:200,progress:score},{id:'reverse5',need:5,label:'Ters şeritte 5 makas',reward:300,progress:reversePasses}];let bonus=0;for(const m of ms){if(S.gameMode!=='timed'&&S.gameMode!=='career'&&!S.missions[m.id]&&m.progress>=m.need){S.missions[m.id]=true;bonus+=m.reward}}if(bonus&&S.gameMode!=='police'&&S.gameMode!=='timed'&&S.gameMode!=='career'){S.money+=bonus;earned+=bonus}save();
-setTimeout(()=>{if(st!=='over')return;$('finishTitle').textContent=reason;$('ot').innerHTML='<p>'+(S.gameMode==='timed'?'<b style="color:#ffb000">SÜREYE KARŞI • PARA YARIŞI</b><br>Makas: '+passes+' araç<br>Mesafe geliri: ₺'+(dist/1000*20).toFixed(2):'<b style="color:#ffb000">'+Math.floor(score).toLocaleString('tr-TR')+' PUAN</b><br>Makas: '+passes+' araç<br>Mesafe puanı: '+Math.floor(distanceScore).toLocaleString('tr-TR')+' puan')+(S.gameMode==='tank'?'<br>Ezilen araç: '+tankCrushes:'')+'<br>Ters şerit makası: '+reversePasses+'<br>Mesafe: '+(dist/1000).toFixed(2)+' km<br>En iyi kombo: x'+bestCombo+'<br>Rekor: '+Math.floor(S.best||0).toLocaleString('tr-TR')+'</p><p style="color:#3ddc97;font-size:1.3em">Toplam kazanç: ₺ '+Math.floor(earned).toLocaleString('tr-TR')+'</p>'+(bonus?'<small>Görev ödülü: ₺'+bonus+'</small>':'');$('goldRestart').style.display=preCrashSave?'':'none';$('goldRestart').textContent='🪙 5 Altınla Kaldığın Yerden Devam Et (Bakiye: '+S.gold+')';$('over').classList.remove('hide')},650)}
+setTimeout(()=>{if(st!=='over')return;$('finishTitle').textContent=reason;$('ot').innerHTML='<p>'+(S.gameMode==='career'?'<b style="color:#ffb000">KARİYER • BÖLÜM '+careerRun.n+'</b><br>Makas: '+passes+' araç<br>Kalan süre: '+Math.ceil(remaining)+' sn':S.gameMode==='timed'?'<b style="color:#ffb000">SÜREYE KARŞI • PARA YARIŞI</b><br>Makas: '+passes+' araç<br>Mesafe geliri: ₺'+(dist/1000*20).toFixed(2):'<b style="color:#ffb000">'+Math.floor(score).toLocaleString('tr-TR')+' PUAN</b><br>Makas: '+passes+' araç<br>Mesafe puanı: '+Math.floor(distanceScore).toLocaleString('tr-TR')+' puan')+(S.gameMode==='tank'?'<br>Ezilen araç: '+tankCrushes:'')+'<br>Ters şerit makası: '+reversePasses+'<br>Mesafe: '+(dist/1000).toFixed(2)+' km<br>En iyi kombo: x'+bestCombo+(S.gameMode==='career'?'':'<br>Rekor: '+Math.floor(S.best||0).toLocaleString('tr-TR'))+'</p><p style="color:#3ddc97;font-size:1.3em">Toplam kazanç: ₺ '+Math.floor(earned).toLocaleString('tr-TR')+'</p>'+(bonus?'<small>Görev ödülü: ₺'+bonus+'</small>':'');$('goldRestart').style.display=preCrashSave?'':'none';$('goldRestart').textContent='🪙 5 Altınla Kaldığın Yerden Devam Et (Bakiye: '+S.gold+')';$('over').classList.remove('hide')},650)}
 function update(dt){el+=dt;
  // Seyrek yol çalışmaları, aynı şeritteki trafik gibi çarpışma yaratır.
  if(S.gameMode!=='tank'&&dist>=nextRoadWork){const lane=Math.floor(Math.random()*4);roadWorks.push({x:LX(lane),y:-170,lane});nextRoadWork=dist+900+Math.random()*1100}
  for(const rw of roadWorks){rw.y+=Math.max(130,P*K)*dt;if(Math.abs(rw.y-pl.y)<36&&Math.abs(rw.x-pl.x)<35&&pl.inv<=0){rw.y=H+500;P*=.5;pl.inv=1.2;pl.dmg=Math.min(5,pl.dmg+1.25);shake=8;combo=0;comboT=0;pop('Bariyer! -%25 can',pl.x,pl.y-75,'#ffb000');if(pl.dmg>=5){if(S.gameMode==='police')policeCatch('collision');else crash('Araç bariyerde ağır hasar aldı!');return;}}}roadWorks=roadWorks.filter(r=>r.y<H+100);
-if(S.gameMode==='timed'||S.gameMode==='tank'||S.gameMode==='career'){remaining-=dt;if(remaining<=0){remaining=0;crash(S.gameMode==='tank'?'Tank süresi doldu!':S.gameMode==='career'?'Kariyer süresi doldu!':'Süre doldu!');return}}if((S.gameMode==='timed'||S.gameMode==='career')&&P>5){clockRoadSeconds+=dt;if(!bonusClock&&clockRoadSeconds>=nextClockAt){bonusClock={x:LX(Math.floor(Math.random()*4)),y:-45,r:22};nextClockAt+=40;}}if(S.gameMode==='police')policeHeat=Math.max(0,policeHeat-dt*.45);const c=S.gameMode==='tank'?{...eff(S.sel),top:140,acc:115,hnd:390,brk:200}:eff(S.sel),sn=SEA[S.sea],gr=sn.grip,nit=S.gameMode!=='tank'&&hasNitro(S.sel)&&k.nit&&N>0,top=S.gameMode==='tank'?140:c.top*(1-.06*pl.dmg)+(nit?20:0);if(nit){N=Math.max(0,N-dt/3.5);if(Math.random()<dt*60)parts.push({x:pl.x+(Math.random()-.5)*8,y:pl.y+pl.h/2+8,vx:(Math.random()-.5)*30,vy:120,l:.35,c:Math.random()<.5?'#4aa3ff':'#ffb000',s:3});shake=Math.max(shake,1.2)}
+if(S.gameMode==='timed'||S.gameMode==='tank'||S.gameMode==='career'){remaining-=dt;if(remaining<=0){remaining=0;crash(S.gameMode==='tank'?'Tank süresi doldu!':S.gameMode==='career'?'Kariyer süresi doldu!':'Süre doldu!');return}}if((S.gameMode==='timed'||S.gameMode==='career')&&P>5){clockRoadSeconds+=dt;if(!bonusClock&&clockRoadSeconds>=nextClockAt&&(S.gameMode!=='career'||careerRun.clockSpawned<careerRun.clockLimit)){if(S.gameMode==='career')careerRun.clockSpawned++;bonusClock={x:LX(S.gameMode==='career'?careerAccessibleClockLane():Math.floor(Math.random()*4)),y:-45,r:22};nextClockAt+=S.gameMode==='career'?35:40;}}if(S.gameMode==='police')policeHeat=Math.max(0,policeHeat-dt*.45);const c=S.gameMode==='tank'?{...eff(S.sel),top:140,acc:115,hnd:390,brk:200}:eff(S.sel),sn=SEA[S.sea],gr=sn.grip,nit=S.gameMode!=='tank'&&hasNitro(S.sel)&&k.nit&&N>0,top=S.gameMode==='tank'?140:c.top*(1-.06*pl.dmg)+(nit?20:0);if(nit){N=Math.max(0,N-dt/3.5);if(Math.random()<dt*60)parts.push({x:pl.x+(Math.random()-.5)*8,y:pl.y+pl.h/2+8,vx:(Math.random()-.5)*30,vy:120,l:.35,c:Math.random()<.5?'#4aa3ff':'#ffb000',s:3});shake=Math.max(shake,1.2)}
 const br=k.down,gas=k.up&&!br;
 const tp=top*(S.man?GR[gear-1]:1),q=P/tp,mt=S.man?(q>=1?0:q<.3?.35+q*2:Math.min(1,1.2-Math.abs(q-.8)*.8))*1.15:1;if(gas){if(P<tp)P=Math.min(tp,P+c.acc*(nit?3:1)*(.7+.3*gr)*mt*dt*(1-P/top*.55))}else if(!br)P=Math.max(0,P-14*dt);
 if(P>top)P=Math.max(top,P-30*dt);if(S.man&&P>tp&&!nit)P=Math.max(tp,P-50*dt);
 if(br)P=Math.max(0,P-c.brk*(.55+.45*gr)*dt);pl.brake=br&&P>0;
-const sx=(k.right?1:0)-(k.left?1:0),tv=sx*c.hnd*Math.min(1,.25+P/70);
+const sx=S.control==='wheel'?(Math.abs(wheelSteer)>.025?wheelSteer:((k.right?1:0)-(k.left?1:0))):((k.right?1:0)-(k.left?1:0)),tv=sx*c.hnd*Math.min(1,.25+P/70);
 pl.vx+=(tv-pl.vx)*Math.min(1,10*gr*dt)+Math.sin(el*1.7)*(1-gr)*140*dt*Math.min(1,P/80);pl.x+=pl.vx*dt;
 const lim=RL+pl.w/2;if(pl.x<lim||pl.x>W-lim){const L=pl.x<lim;pl.x=L?lim:W-lim;if(P>5){P*=Math.max(0,1-2*dt);sparks(L?RL:W-RL,pl.y,2)}pl.vx*=-.2;shake=Math.max(shake,P>5?3:0)}
 if(pl.inv>0)pl.inv-=dt;
@@ -554,13 +604,17 @@ if(policeCar&&st==='play'){
  policeCar.x+=(pl.x-policeCar.x)*Math.min(1,dt*.85);
 }
 
- off=(off+P*K*dt)%80;so=(so+P*K*dt)%880;sideScroll=(sideScroll+P*K*dt)%1130;dist+=P/3.6*dt;const mm=sn.m*DF[S.diff].m*(S.man?1.06:1)*.5*earnMultiplier(S.sel);const travelPay=S.gameMode==='timed'?(P/3.6*dt)/1000*20:P*dt*.003*mm*1.05;if(S.gameMode!=='career'){S.money+=travelPay;earned+=travelPay;}if(S.gameMode==='career'&&careerRun&&dist>=careerRun.km*1000){dist=careerRun.km*1000;crash('Kariyer tamamlandı!');return;}if(S.gameMode==='police'&&dist>=10000){dist=10000;crash('🏁 Polis takibinden kaçtın! 10 KM TAMAMLANDI');return;}const distancePoints=(P/3.6*dt)/10;if(S.gameMode!=='timed'){distanceScore+=distancePoints;score+=distancePoints;}
+ off=(off+P*K*dt)%80;so=(so+P*K*dt)%880;sideScroll=(sideScroll+P*K*dt)%1130;dist+=P/3.6*dt;const mm=sn.m*DF[S.diff].m*(S.man?1.06:1)*.5*earnMultiplier(S.sel);const travelPay=S.gameMode==='timed'?(P/3.6*dt)/1000*20:P*dt*.003*mm*1.05;if(S.gameMode!=='career'){S.money+=travelPay;earned+=travelPay;}if(S.gameMode==='career'&&careerRun&&dist>=careerRun.km*1000){dist=careerRun.km*1000;crash('Kariyer tamamlandı!');return;}if(S.gameMode==='police'&&dist>=10000){dist=10000;crash('🏁 Polis takibinden kaçtın! 10 KM TAMAMLANDI');return;}const distancePoints=(P/3.6*dt)/10;if(S.gameMode!=='timed'&&S.gameMode!=='career'){distanceScore+=distancePoints;score+=distancePoints;}
 // Süreye karşı: sürüşün her 40. saniyesinde yola kronometre bırak.
 if((S.gameMode==='timed'||S.gameMode==='career')&&bonusClock){
  bonusClock.y+=Math.max(135,P*K)*dt;
+ if(S.gameMode==='career'&&bonusClock.y<pl.y-125){
+  const blocked=cars.some(a=>Math.abs(a.x-bonusClock.x)<58&&Math.abs(a.y-bonusClock.y)<115)||roadWorks.some(a=>Math.abs(a.x-bonusClock.x)<58&&Math.abs(a.y-bonusClock.y)<100);
+  if(blocked){const lane=careerAccessibleClockLane();bonusClock.x=LX(lane);}
+ }
  if(Math.abs(bonusClock.x-pl.x)<pl.w/2+bonusClock.r*.7&&Math.abs(bonusClock.y-pl.y)<pl.h/2+bonusClock.r*.7){
-  remaining+=S.gameMode==='career'?careerRun.clock:20;pop('+'+(S.gameMode==='career'?careerRun.clock:20)+' SANİYE ⏱',pl.x,pl.y-85,'#70e8ff');beep(950,.2,.12);bonusClock=null;
- }else if(bonusClock.y>H+50)bonusClock=null;
+  remaining+=S.gameMode==='career'?careerRun.clock:20;pop('+'+(S.gameMode==='career'?careerRun.clock:20)+' SANİYE ⏱',pl.x,pl.y-85,'#70e8ff');beep(950,.2,.12);bonusClock=null;if(S.gameMode==='career')nextClockAt=clockRoadSeconds+35;
+ }else if(bonusClock.y>H+50){bonusClock=null;if(S.gameMode==='career')nextClockAt=clockRoadSeconds+35;}
 }
 // Sınırsız modda seyrek görünen 2000 puanlık yıldız. Mesafe bazlı aralık.
 if(S.gameMode==='endless'){
@@ -590,7 +644,7 @@ a.tl-=dt;
 if(a.sigT>0){a.sigT-=dt;if(a.sigT<=0){if(clear(a,LX(a.tl2))){a.mv=true;a.l=a.tl2}else a.sd=0}}
 else if(!a.mv&&a.tl<=0){a.tl=(a.type=='tir'?8:3)+Math.random()*7;const gl=a.dir<0?[0,1]:S.mode=='2'?[2,3]:[0,1,2,3],o=[a.l-1,a.l+1].filter(x=>gl.includes(x));
 if(o.length){const tg=rnd(o);if(clear(a,LX(tg))){a.tl2=tg;a.sd=tg<a.l?-1:1;a.sigT=1.4}}}
-if(a.mv){const d=LX(a.l)-a.x,s=70*dt;if(Math.abs(d)<=s){a.x=LX(a.l);a.mv=false;a.sd=0}else a.x+=Math.sign(d)*s}
+if(a.mv){const d=(LX(a.l)+(a.laneOffset||0))-a.x,s=70*dt;if(Math.abs(d)<=s){a.x=LX(a.l)+(a.laneOffset||0);a.mv=false;a.sd=0}else a.x+=Math.sign(d)*s}
 // Şeritlerin arasından hasarsız geçme açığını kapat: araç boyutları ve
 // şerit aralığına göre tutarlı, her oyuncu aracına uygulanan çarpışma alanı.
 // Görünen araç genişliklerine uygun hitbox; motosikletler gereksiz geniş sayılmaz.
@@ -602,7 +656,7 @@ else if(dy<hit-4&&ox<0){pl.x+=Math.sign(pl.x-a.x||1)*140*dt;
 if(pl.inv<=0){if(P>=70){if(S.gameMode==='police')policeCatch('collision');else crash();return}
 pl.dmg=Math.min(5,pl.dmg+1);pl.inv=1.3;P*=.35;pl.vx=Math.sign(pl.x-a.x||1)*220;shake=9;sparks(pl.x,pl.y,14);pop('Hasar!',pl.x,pl.y-60,'#ff6b5a');combo=0}}
 else if(dy<hit&&ox>=0&&ox<14.7&&!a.near&&P>90){a.near=true;combo=Math.min(8,combo+1);comboT=5;
-beep(520+combo*55,.07,.02);passes++;trackAchievements(1);if(a.dir<0&&S.mode==='2')reversePasses++;if(S.gameMode==='police')policeHeat=Math.min(100,policeHeat+(a.dir<0?12:7));bestCombo=Math.max(bestCombo,combo);const points=Math.round((P-60)*2*(1+(combo-1)*.18)*(a.dir<0?1.4:1));if(S.gameMode!=='timed')score+=points;const gn=S.gameMode==='timed'?Math.round(100*(1.5+(Math.max(0,P-90)/100))*(1+(combo-1)*.15)*(a.dir<0?1.3:1))/100:Math.round((P-60)*.085*(1+(combo-1)*.13)*(a.dir<0?1.2:1)*mm*1.05);if(hasNitro(S.sel))N=Math.min(1,N+.3);if(S.gameMode!=='career'){S.money+=gn;earned+=gn;}pop(S.gameMode==='timed'?'MAKAS +₺'+gn.toFixed(2):'+'+points+' PUAN',pl.x,pl.y-60,'#ffb000')}}
+beep(520+combo*55,.07,.02);passes++;trackAchievements(1);if(a.dir<0&&S.mode==='2')reversePasses++;if(S.gameMode==='police')policeHeat=Math.min(100,policeHeat+(a.dir<0?12:7));bestCombo=Math.max(bestCombo,combo);const points=Math.round((P-60)*2*(1+(combo-1)*.18)*(a.dir<0?1.4:1));if(S.gameMode!=='timed'&&S.gameMode!=='career')score+=points;const gn=S.gameMode==='timed'?Math.round(100*(1.5+(Math.max(0,P-90)/100))*(1+(combo-1)*.15)*(a.dir<0?1.3:1))/100:Math.round((P-60)*.085*(1+(combo-1)*.13)*(a.dir<0?1.2:1)*mm*1.05);if(hasNitro(S.sel))N=Math.min(1,N+.3);if(S.gameMode!=='career'){S.money+=gn;earned+=gn;}const timeBonus=S.gameMode==='career'?(P>=190&&a.dir<0?5:P>=165?4:P>=125?3:2):0;if(timeBonus)remaining+=timeBonus;pop(S.gameMode==='career'?'MAKAS! +'+timeBonus+' SANİYE':S.gameMode==='timed'?'MAKAS +₺'+gn.toFixed(2):'+'+points+' PUAN',pl.x,pl.y-60,'#ffb000')}}
 cars=cars.filter(a=>a.y<H+260&&a.y>-320);
 if(dist>=100)spT-=dt;if(dist>=100&&spT<=0){spawn();if((S.gameMode==='tank'?1:S.diff)>1&&Math.random()<.4)spawn();spT=Math.max(.22,1-el*.006)*DF[S.gameMode==='tank'?1:S.diff].d*Math.min(1.4,300/Math.max(150,P*K))*(.7+Math.random()*.6)}}
 let hornHeld=false,hornOsc=null,hornGain=null,hornInterval=null;
@@ -758,7 +812,16 @@ if(st==='catch'){
  if(st=='play')update(dt);else if(st=='menu')off=(off+120*dt)%80,so=(so+120*dt)%880,sideScroll=(sideScroll+120*dt)%1130;
 frame(st==='pause'?0:dt);requestAnimationFrame(loop)}
 /* menu */
-let menuStep=0;function setStep(n){menuStep=Math.max(0,Math.min(2,n));$('garageStep').classList.toggle('hide',menuStep!==0);$('garageContent').classList.toggle('hide',menuStep!==0);$('mapStep').classList.toggle('hide',menuStep!==1);$('raceStep').classList.toggle('hide',menuStep!==2);$('helpText').classList.toggle('hide',menuStep!==2);$('nextStep').classList.toggle('hide',menuStep===2);$('go').classList.toggle('hide',menuStep!==2);$('backStep').textContent=menuStep===0?'⌂ Ana ekran':'◀ Geri';$('menu').scrollTop=0;rm()}
+let wheelSteer=0,wheelPointer=null;
+const wheelEl=$('steeringWheel');
+function turnWheel(e){const r=wheelEl.getBoundingClientRect(),cx=r.left+r.width/2;wheelSteer=Math.max(-1,Math.min(1,(e.clientX-cx)/(r.width*.32)));wheelEl.querySelector('.spoke').style.transform='rotate('+(-wheelSteer*65)+'deg)';wheelEl.querySelector('.spoke.vertical').style.transform='rotate('+(90-wheelSteer*65)+'deg)';wheelEl.setAttribute('aria-valuenow',String(Math.round(wheelSteer*100)))}
+wheelEl.addEventListener('pointerdown',e=>{if(S.control!=='wheel')return;wheelPointer=e.pointerId;wheelEl.setPointerCapture(e.pointerId);turnWheel(e);e.preventDefault()});
+wheelEl.addEventListener('pointermove',e=>{if(wheelPointer===e.pointerId){turnWheel(e);e.preventDefault()}});
+function releaseWheel(e){if(wheelPointer!==e.pointerId)return;wheelPointer=null;wheelSteer=0;wheelEl.querySelector('.spoke').style.transform='rotate(0deg)';wheelEl.querySelector('.spoke.vertical').style.transform='rotate(90deg)';wheelEl.setAttribute('aria-valuenow','0')}
+wheelEl.addEventListener('pointerup',releaseWheel);wheelEl.addEventListener('pointercancel',releaseWheel);wheelEl.addEventListener('lostpointercapture',releaseWheel);
+function syncControls(){const wheel=S.control==='wheel';$('st').classList.toggle('wheel-control',wheel);document.querySelectorAll('#controlOptions button').forEach(b=>b.classList.toggle('on',b.dataset.control===S.control))}
+$('controlOptions').onclick=e=>{const b=e.target.closest('button[data-control]');if(!b)return;S.control=b.dataset.control;wheelSteer=0;save();syncControls()};
+let menuStep=0;function setStep(n){menuStep=Math.max(0,Math.min(2,n));$('garageStep').classList.toggle('hide',menuStep!==0);$('careerGarageReturn').classList.toggle('hide',!S.career.returnToCareer);$('garageContent').classList.toggle('hide',menuStep!==0);$('mapStep').classList.toggle('hide',menuStep!==1);$('raceStep').classList.toggle('hide',menuStep!==2);$('helpText').classList.toggle('hide',menuStep!==2);$('nextStep').classList.toggle('hide',menuStep===2);$('go').classList.toggle('hide',menuStep!==2);$('backStep').textContent=menuStep===0?'⌂ Ana ekran':'◀ Geri';$('menu').scrollTop=0;rm()}
 const MODE_LABELS={endless:'Sınırsız',police:'Polis kovalamacası',timed:'Süreye karşı • 1 km = ₺20 + makas bonusu',tank:'🪖 Tank modu'};
 function showInfo(kind){$('welcome').classList.add('hide');$('infoPanel').classList.remove('hide');$('infoTitle').textContent=kind==='missions'?'🎯 GÜNLÜK / HAFTALIK GÖREVLER':kind==='leader'?'🏆 KİŞİSEL REKORLAR':'📊 İSTATİSTİKLER';
  if(kind==='missions'){const cd=ensureChallenges();$('infoBody').innerHTML='<p>💵 $'+Math.floor(S.money).toLocaleString('tr-TR')+' • 🪙 '+S.gold+' altın</p><small>Görevler cihazın tarihine göre sıfırlanır. Ödülleri tamamlayınca al.</small>'+missionMarkup(cd.daily,'Günlük • 3 görev')+missionMarkup(cd.weekly,'Haftalık • 10 görev')}
@@ -802,6 +865,8 @@ $('spinWheel').onclick=()=>{const r=S.dailyReward,today=dayKey();if(wheelSpinnin
 $('missionsOpen').onclick=()=>showInfo('missions');$('statsOpen').onclick=()=>showInfo('stats');$('leaderOpen').onclick=()=>showInfo('leader');$('infoBody').onclick=e=>{const b=e.target.closest('[data-claim]');if(b)claimChallenge(b.dataset.claim)};$('infoBack').onclick=()=>{$('infoPanel').classList.add('hide');$('welcome').classList.remove('hide')};
 $('gameModes').onclick=e=>{const b=e.target.closest('button[data-mode]');if(b){S.gameMode=b.dataset.mode;save();rm()}};
 $('careerClose').onclick=closeCareer;
+$('careerGarageReturn').onclick=()=>{S.career.returnToCareer=false;$('menu').classList.add('hide');openCareer()};
+$('careerGarage').onclick=()=>{S.career.returnToCareer=true;$('careerPanel').classList.add('hide');S.gameMode='endless';$('menu').classList.remove('hide');setStep(0);bi=S.sel;rm()};
 $('careerPrev').onclick=()=>{S.career.selected=Math.max(1,(S.career.selected||1)-10);careerView()};
 $('careerNext').onclick=()=>{S.career.selected=Math.min(250,(S.career.selected||1)+10);careerView()};
 $('careerStageGrid').onclick=e=>{const b=e.target.closest('[data-careerlevel]');if(b){S.career.selected=+b.dataset.careerlevel;careerView()}};
@@ -809,7 +874,7 @@ $('careerChoose').onclick=()=>{$('careerStageScreen').classList.add('hide');$('c
 $('careerDiffBack').onclick=()=>{$('careerDifficultyScreen').classList.add('hide');$('careerStageScreen').classList.remove('hide');careerView()};
 $('careerDifficulty').onclick=e=>{const b=e.target.closest('[data-careerdiff]');if(b){S.career.difficulty=+b.dataset.careerdiff;save();careerDifficultyView()}};
 $('careerStart').onclick=startCareer;
-$('welcomePlay').onclick=()=>{$('welcome').classList.add('hide');$('modeSelect').classList.remove('hide')};
+$('welcomePlay').onclick=()=>{$('welcome').classList.add('hide');$('modeSelect').classList.remove('hide')};$('welcomeGarage').onclick=()=>{$('welcome').classList.add('hide');$('menu').classList.remove('hide');setStep(0);audioInit()};
 $('modeBack').onclick=()=>{$('modeSelect').classList.add('hide');$('welcome').classList.remove('hide')};
 $('modeSelect').onclick=e=>{const b=e.target.closest('[data-choice]');if(!b)return;
  const mode=b.dataset.choice;$('modeSelect').classList.add('hide');
@@ -856,7 +921,7 @@ function goMainMenu(){if(S.gameMode==='career'){S.gameMode='endless';careerRun=n
 function pauseGame(){if(st!=='play')return;st='pause';k={};$('pausePanel').classList.remove('hide');$('pauseButton').style.display='none';}
 function resumeGame(){if(st!=='pause')return;st='play';$('pausePanel').classList.add('hide');$('pauseButton').style.display='block';last=performance.now();}
 $('pauseButton').onclick=pauseGame;$('resumeGame').onclick=resumeGame;$('pauseRestart').onclick=start;$('pauseMenu').onclick=goMainMenu;
-$('gar').onclick=()=>{st='menu';$('over').classList.add('hide');$('menu').classList.remove('hide');bi=S.sel;setStep(0)};
+$('gar').onclick=()=>{st='menu';k={};$('over').classList.add('hide');$('pausePanel').classList.add('hide');$('menu').classList.add('hide');$('modeSelect').classList.remove('hide');bi=S.sel};
 /* softer layered engine synthesizer: filtered harmonics, smooth RPM */
 let acx,engineOsc,engineGain,engineLow,engineHigh,engineFilter,engineMaster,melodyTimer,melodyStep=0;
 function audioInit(){try{
