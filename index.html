@@ -106,11 +106,17 @@ small{color:var(--mut);line-height:1.35}
 .mode-tile[data-choice="police"]{--edge:#ff9b38;--glow:#6c300c;--photo:linear-gradient(180deg,#66331355,#11101bb0),url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=700&q=75")}
 .mode-tile[data-choice="tank"]{--edge:#a2cf57;--glow:#334c1a;--photo:linear-gradient(180deg,#53652c55,#111c0fb0),url("https://images.unsplash.com/photo-1500534623283-312aade485b7?w=700&q=75")}
 .mode-back{position:relative;z-index:1;height:42px;min-height:42px;max-width:320px;align-self:center;border-color:#54687d;background:#101c2c;color:#dcecff}
-@media(orientation:portrait){.mode-grid{grid-template-columns:1fr;grid-template-rows:repeat(5,minmax(0,1fr));gap:7px;height:calc(100% - 49px);padding:8px}
-.mode-tile{flex-direction:row;justify-content:flex-start;gap:9px;padding:8px 100px 8px 12px;text-align:left;border-radius:14px;background-position:center 53%}
-.mode-tile:before{background:linear-gradient(90deg,#070e1ce8 0%,#07101cd0 48%,#0a132477 100%)}
-.mode-tile:after{content:"OYNA ❯";left:auto;right:8px;bottom:50%;transform:translateY(50%);width:68px;padding:10px 2px;font-size:12px}
-.mode-tile b{font-size:clamp(13px,4vw,19px)}.mode-tile small{display:none}.mode-icon{font-size:clamp(24px,6vw,36px)}}
+/* Dikey telefonda da yatay fotoğraf kartları: yana kaydırılabilir */
+#modeSelect .mode-grid{scrollbar-width:thin;scrollbar-color:#607991 #0b1320}
+@media(orientation:portrait){
+ #modeSelect .mode-grid{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:10px;width:100%;height:calc(100% - 49px);padding:10px 12px 14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
+ #modeSelect .mode-tile{flex:0 0 clamp(155px,57%,240px);width:clamp(155px,57%,240px);height:100%;box-sizing:border-box;scroll-snap-align:center;flex-direction:column;justify-content:flex-start;align-items:center;gap:12px;padding:clamp(14px,3vh,24px) 8px 20px;text-align:center;border-radius:18px;background-position:center}
+ #modeSelect .mode-tile:before{background:linear-gradient(180deg,#070e1cb0 0%,#07101c55 45%,#080e1ce0 100%)}
+ #modeSelect .mode-tile:after{content:"OYNA ❯";left:9%;right:9%;width:auto;bottom:14px;transform:none;padding:12px 3px;font-size:clamp(13px,3.7vw,18px)}
+ #modeSelect .mode-tile b{font-size:clamp(16px,4.5vw,22px)}
+ #modeSelect .mode-tile small{display:block;font-size:clamp(11px,2.7vw,14px)}
+ #modeSelect .mode-icon{font-size:clamp(33px,10vw,53px)}
+}
 </style><style>
 .career-stage-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:12px 0}
 .career-stage{min-height:73px;border:1px solid #536174;background:#202d3a;border-radius:10px;color:white;padding:5px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
@@ -863,7 +869,7 @@ function syncControls(){const wheel=S.control==='wheel';$('st').classList.toggle
 function setDriveControl(type){S.control=type==='wheel'?'wheel':'buttons';wheelSteer=0;k.left=0;k.right=0;save();syncControls()}
 $('pauseButtons').onclick=()=>setDriveControl('buttons');$('pauseWheel').onclick=()=>setDriveControl('wheel');
 $('controlOptions').onclick=e=>{const b=e.target.closest('button[data-control]');if(!b)return;setDriveControl(b.dataset.control)};
-let menuStep=0;function setStep(n){menuStep=Math.max(0,Math.min(2,n));$('garageStep').classList.toggle('hide',menuStep!==0);$('careerGarageReturn').classList.toggle('hide',!S.career.returnToCareer);$('garageContent').classList.toggle('hide',menuStep!==0);$('mapStep').classList.toggle('hide',menuStep!==1);$('raceStep').classList.toggle('hide',menuStep!==2);$('helpText').classList.toggle('hide',menuStep!==2);$('nextStep').classList.toggle('hide',menuStep===2);$('go').classList.toggle('hide',menuStep!==2);$('backStep').textContent=menuStep===0?'⌂ Ana ekran':'◀ Geri';$('menu').scrollTop=0;rm()}
+let menuStep=0;function setStep(n){menuStep=Math.max(0,Math.min(2,n));$('garageStep').classList.toggle('hide',menuStep!==0);$('careerGarageReturn').classList.toggle('hide',!S.career.returnToCareer);$('garageContent').classList.toggle('hide',menuStep!==0);$('mapStep').classList.toggle('hide',menuStep!==1);$('raceStep').classList.toggle('hide',menuStep!==2);$('helpText').classList.toggle('hide',menuStep!==2);$('nextStep').classList.toggle('hide',menuStep===2);$('nextStep').textContent=menuStep===0&&S.career.returnToCareer?'▶ KARİYERE DEVAM ET':'Devam ▶';$('go').classList.toggle('hide',menuStep!==2);$('backStep').textContent=menuStep===0?(S.career.returnToCareer?'◀ Kariyere dön':'⌂ Ana ekran'):'◀ Geri';$('menu').scrollTop=0;rm()}
 const MODE_LABELS={endless:'Sınırsız',police:'Polis kovalamacası',timed:'Süreye karşı • 1 km = ₺20 + makas bonusu',tank:'🪖 Tank modu'};
 function showInfo(kind){$('welcome').classList.add('hide');$('infoPanel').classList.remove('hide');$('infoTitle').textContent=kind==='missions'?'🎯 GÜNLÜK / HAFTALIK GÖREVLER':kind==='leader'?'🏆 KİŞİSEL REKORLAR':'📊 İSTATİSTİKLER';
  if(kind==='missions'){const cd=ensureChallenges();$('infoBody').innerHTML='<p>💵 $'+Math.floor(S.money).toLocaleString('tr-TR')+' • 🪙 '+S.gold+' altın</p><small>Görevler cihazın tarihine göre sıfırlanır. Ödülleri tamamlayınca al.</small>'+missionMarkup(cd.daily,'Günlük • 3 görev')+missionMarkup(cd.weekly,'Haftalık • 10 görev')}
@@ -908,7 +914,7 @@ $('missionsOpen').onclick=()=>showInfo('missions');$('statsOpen').onclick=()=>sh
 $('gameModes').onclick=e=>{const b=e.target.closest('button[data-mode]');if(b){S.gameMode=b.dataset.mode;save();rm()}};
 $('careerClose').onclick=closeCareer;
 $('careerGarageReturn').onclick=()=>{S.career.returnToCareer=false;$('menu').classList.add('hide');openCareer()};
-$('careerGarage').onclick=()=>{S.career.returnToCareer=true;$('careerPanel').classList.add('hide');S.gameMode='endless';$('menu').classList.remove('hide');setStep(0);bi=S.sel;rm()};
+$('careerGarage').onclick=()=>{S.career.returnToCareer=true;$('careerPanel').classList.add('hide');S.gameMode='career';$('menu').classList.remove('hide');setStep(0);bi=S.sel;rm()};
 $('careerPrev').onclick=()=>{S.career.selected=Math.max(1,(S.career.selected||1)-10);careerView()};
 $('careerNext').onclick=()=>{S.career.selected=Math.min(250,(S.career.selected||1)+10);careerView()};
 $('careerStageGrid').onclick=e=>{const b=e.target.closest('[data-careerlevel]');if(b){S.career.selected=+b.dataset.careerlevel;careerView()}};
@@ -926,7 +932,7 @@ $('modeSelect').onclick=e=>{const b=e.target.closest('[data-choice]');if(!b)retu
 };
 $('tankReadyBack').onclick=()=>{$('tankReady').classList.add('hide');$('modeSelect').classList.remove('hide')};
 $('tankStartNow').onclick=()=>{if(tankRemaining())return;S.gameMode='tank';save();$('tankReady').classList.add('hide');$('welcome').classList.add('hide');start()};
-$('nextStep').onclick=()=>setStep(menuStep+1);$('backStep').onclick=()=>{if(menuStep===0){$('menu').classList.add('hide');$('welcome').classList.remove('hide')}else setStep(menuStep-1)};
+$('nextStep').onclick=()=>{if(menuStep===0&&S.career.returnToCareer){S.career.returnToCareer=false;$('menu').classList.add('hide');openCareer();return;}setStep(menuStep+1)};$('backStep').onclick=()=>{if(menuStep===0){$('menu').classList.add('hide');if(S.career.returnToCareer){S.career.returnToCareer=false;openCareer()}else $('welcome').classList.remove('hide')}else setStep(menuStep-1)};
 const PAINT_COLORS=['#f2f2f2','#20242a','#c8372d','#4aa3df','#3ddc97','#ffb000','#a36de0','#f16c7c','#8d9299','#2f4d78'];
 let pendingPaint=null,paintingCar=null;
 function drawPaintPreview(){const cv=$('paintPreview'),ctx=cv.getContext('2d'),c=CARS[paintingCar],d=TY[c.type];ctx.clearRect(0,0,cv.width,cv.height);ctx.save();ctx.translate(20,6);ctx.scale(1.8,1.55);drawCar(ctx,{x:40,y:63,w:d[0],h:d[1],dir:1,type:c.type,col:pendingPaint,t:0});ctx.restore()}
