@@ -265,6 +265,31 @@ small{color:var(--mut);line-height:1.35}
 #st.layout-portrait{width:100vw!important;height:100dvh!important;max-width:none!important;max-height:none!important;overflow:hidden!important}
 #st.layout-portrait #c{position:absolute!important;left:50%!important;top:0!important;display:block!important;width:auto!important;height:100%!important;min-width:0!important;max-width:none!important;max-height:none!important;aspect-ratio:960 / 720!important;object-fit:contain!important;margin:0!important;transform:translateX(-50%)!important;transform-origin:center center!important}
 #st.layout-portrait.play canvas#c{width:auto!important;height:100%!important;margin-left:0!important;transform:translateX(-50%)!important}
+</style><style id="landscape-control-size-boost">
+/* Sadece yatay oynanista dokunmatik direksiyon, gaz, fren ve nitro buyur. */
+@media (orientation:landscape){
+ #st.layout-landscape.play #pad button{
+  box-sizing:border-box!important;
+  width:clamp(70px,17vh,96px)!important;
+  height:clamp(70px,17vh,96px)!important;
+  flex:0 0 auto!important;
+  font-size:clamp(16px,3.6vh,22px)!important;
+  border-radius:17px!important;
+ }
+ #st.layout-landscape.play #pad>div{
+  gap:clamp(4px,1vw,9px)!important;
+  padding-bottom:max(7px,env(safe-area-inset-bottom,0px))!important;
+ }
+ #st.layout-landscape.play #hornButton{
+  width:clamp(62px,14vh,84px)!important;
+  height:clamp(62px,14vh,84px)!important;
+ }
+ #st.layout-landscape.play.man #gp button{
+  min-height:clamp(46px,11vh,58px)!important;
+  min-width:clamp(70px,15vh,86px)!important;
+  font-size:clamp(13px,2.7vh,17px)!important;
+ }
+}
 </style></head><body>
 <div id="rotateHint" style="display:none">📱 Daha geniş oyun alanı için telefonu yatay çevir.</div><div id="st"><canvas id="c" width="960" height="720"></canvas><button id="sirenButton" type="button" aria-label="Polis sireni">🚨<small style="display:block;color:white">SİREN</small></button><button id="hornButton" type="button" aria-label="Korna"><svg viewBox="0 0 24 24" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h4l8 5V5l-8 5H4Z"/><path d="M19 9a4 4 0 0 1 0 6M21 6a8 8 0 0 1 0 12"/></svg></button><div id="displayTools"><button id="screenMode" type="button" class="hide" aria-hidden="true" tabindex="-1">↔ Yatay / Dikey</button></div><button id="pauseButton" type="button" style="position:absolute;z-index:16;top:9px;right:9px;display:none;background:#141b24e8;border-color:#ffb000">⏸ Duraklat</button><div id="pausePanel" class="ov hide" style="z-index:35;justify-content:center;align-items:center;text-align:center;background:#101820ee"><h1>⏸ OYUN DURAKLATILDI</h1><button class="big" id="resumeGame" style="width:85%">▶ Devam et</button><button id="pauseRestart" style="width:85%">↻ Yeniden başlat</button><div id="pauseControlRow" style="display:flex;width:85%;gap:8px;justify-content:center;flex-wrap:wrap"><button type="button" id="pauseButtons" style="flex:1;min-width:115px">◀ ▶ Tuşlar</button><button type="button" id="pauseWheel" style="flex:1;min-width:115px">◉ Direksiyon</button></div><button id="pauseMenu" style="width:85%">⌂ Ana menüye dön</button></div><div id="catchOverlay">🚨 POLİS GELİYOR!</div>
 <div id="welcome" class="ov home-screen">
