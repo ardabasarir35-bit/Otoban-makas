@@ -255,6 +255,11 @@ small{color:var(--mut);line-height:1.35}
 #rewardsPanel .wheel-stage #wheelDisc{width:100%!important;height:100%!important;aspect-ratio:1 / 1!important;box-sizing:border-box!important;border-radius:50%!important;flex:none!important;overflow:hidden}
 #rewardsPanel .wheel-stage .wheel-brand{width:28%;height:auto;aspect-ratio:1 / 1;flex:none;box-sizing:border-box}
 @media(orientation:landscape){#rewardsPanel .wheel-stage{width:min(38vh,230px)!important}}
+</style><style id="prevent-double-tap-zoom">
+/* Mobilde cift dokunma yakinlastirmasini kapat, menulerin kaydirilmasini koru. */
+#st{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#st button,#st .ov,#st .ov button{touch-action:manipulation}
+#st canvas#c,#st #pad,#st #pad button,#st #gp,#st #gp button,#st #steeringWheel{touch-action:none}
 </style></head><body>
 <div id="rotateHint" style="display:none">📱 Daha geniş oyun alanı için telefonu yatay çevir.</div><div id="st"><canvas id="c" width="960" height="720"></canvas><button id="sirenButton" type="button" aria-label="Polis sireni">🚨<small style="display:block;color:white">SİREN</small></button><button id="hornButton" type="button" aria-label="Korna"><svg viewBox="0 0 24 24" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h4l8 5V5l-8 5H4Z"/><path d="M19 9a4 4 0 0 1 0 6M21 6a8 8 0 0 1 0 12"/></svg></button><div id="displayTools"><button id="screenMode" type="button" class="hide" aria-hidden="true" tabindex="-1">↔ Yatay / Dikey</button></div><button id="pauseButton" type="button" style="position:absolute;z-index:16;top:9px;right:9px;display:none;background:#141b24e8;border-color:#ffb000">⏸ Duraklat</button><div id="pausePanel" class="ov hide" style="z-index:35;justify-content:center;align-items:center;text-align:center;background:#101820ee"><h1>⏸ OYUN DURAKLATILDI</h1><button class="big" id="resumeGame" style="width:85%">▶ Devam et</button><button id="pauseRestart" style="width:85%">↻ Yeniden başlat</button><div id="pauseControlRow" style="display:flex;width:85%;gap:8px;justify-content:center;flex-wrap:wrap"><button type="button" id="pauseButtons" style="flex:1;min-width:115px">◀ ▶ Tuşlar</button><button type="button" id="pauseWheel" style="flex:1;min-width:115px">◉ Direksiyon</button></div><button id="pauseMenu" style="width:85%">⌂ Ana menüye dön</button></div><div id="catchOverlay">🚨 POLİS GELİYOR!</div>
 <div id="welcome" class="ov home-screen">
@@ -320,6 +325,10 @@ small{color:var(--mut);line-height:1.35}
 <div id="steeringWheel" role="slider" aria-label="Direksiyon" aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"><div class="spoke"></div><div class="spoke vertical"></div><div class="hub">●</div></div><div id="gp"><button data-g="1">Vites +</button><button data-g="-1">Vites −</button></div><div id="pad"><div><button data-k="left">◀</button><button data-k="right">▶</button></div><div><button data-k="nit" aria-label="Nitro" title="Nitro">⚡</button><button data-k="down">Fren</button><button data-k="up">Gaz</button></div></div>
 </div>
 <script>
+// Cift tiklamadan kaynaklanan varsayilan tarayici yakinlastirmasini engelle.
+// Tek dokunma, tiklama ve oyun kontrol tuslarinin davranisi degismez.
+document.getElementById('st').addEventListener('dblclick',event=>event.preventDefault());
+
 const OX=60,W=440,H=720,K=3.2,RL=48,PY=570,$=id=>document.getElementById(id);
 const cv=$('c'),g=cv.getContext('2d'),LX=l=>85+90*l;
 const TY={mini:[34,58],hatch:[38,66],sedan:[40,78],van:[44,92],kamyonet:[46,88],motor:[23,52],tir:[50,106],coupe:[40,76],super:[44,82],albea:[42,82],laguna:[41,78],retro:[43,65],pickup:[49,94],roadster:[44,69],muscle:[48,83],rally:[43,74],electric:[43,79],police:[49,91],wagon:[46,89]};
