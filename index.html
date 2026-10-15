@@ -150,9 +150,78 @@ small{color:var(--mut);line-height:1.35}
 
 #pauseControlRow button.active-control{border-color:#ffb000!important;background:#4b391d!important;color:#ffdb83!important}
 @media(max-height:390px) and (orientation:landscape){#st.layout-landscape.play{--control-size:clamp(54px,15vh,65px)}}
+</style><style>
+/* Sinematik ana menü; oyun ve diğer paneller etkilenmez. */
+#st #welcome.home-screen{padding:clamp(12px,2.6vw,26px);justify-content:space-between;align-items:stretch;gap:12px;text-align:left;overflow:auto;background:linear-gradient(90deg,#07101deb 0%,#07101d75 48%,#09111dbb 100%),linear-gradient(0deg,#050910d9,transparent 48%),url("https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1400&q=85") center/cover no-repeat!important;color:#fff}
+.home-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-shrink:0}
+.home-logo{display:flex;flex-direction:column;align-items:flex-start;font-family:"Saira Condensed",Barlow,sans-serif;font-weight:900;font-style:italic;letter-spacing:.05em;text-shadow:0 3px 2px #000,0 0 18px #e52935aa;line-height:.87;filter:drop-shadow(0 2px 3px #000)}
+.home-logo span{font-size:clamp(29px,5.8vw,65px);color:#f6f7fb}
+.home-logo strong{font-size:clamp(35px,6.9vw,78px);color:#ff3447;-webkit-text-stroke:.5px #ffe0e0}
+.home-logo em{font-size:.57em;color:#fff}
+.home-money{border:1px solid #66758a88;background:#08101dc9;backdrop-filter:blur(9px);border-radius:13px;padding:9px 13px;font-weight:800;font-size:clamp(10px,1.6vw,17px);box-shadow:0 4px 16px #0009;white-space:nowrap}
+.home-layout{display:grid;grid-template-columns:minmax(180px,36%) minmax(0,1fr);gap:clamp(14px,3vw,35px);align-items:center;min-height:0;flex:1}
+.home-nav{display:flex;flex-direction:column;gap:8px;min-width:0}
+#st .home-nav button{display:flex;align-items:center;gap:9px;min-height:clamp(38px,7vh,63px);padding:7px 12px;border:1px solid #69798caa;border-radius:12px;background:#07101dcb;backdrop-filter:blur(9px);font-weight:900;font-style:italic;font-size:clamp(11px,1.7vw,18px);text-align:left;box-shadow:0 3px 12px #0007}
+#st .home-nav button:first-child{border-color:#ff4968;background:#4b1529d4}
+.home-nav button span{flex:1}.home-nav button b{color:#cdd7e6}
+.home-actions{display:flex;flex-direction:column;gap:15px;min-width:0}
+#st .home-play{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:clamp(90px,23vh,185px);padding:clamp(12px,2vw,24px);border:1px solid #18b4ec;border-radius:18px;background:linear-gradient(110deg,#072a64e6,#06111dd8 65%,#07563cc9);backdrop-filter:blur(9px);box-shadow:0 0 18px #1686dd55,inset 0 0 20px #0007;text-align:left}
+.home-flag{font-size:clamp(27px,5vw,65px)}
+.home-play>span:nth-child(2){display:flex;flex-direction:column;gap:6px;flex:1}
+.home-play strong{font:italic 900 clamp(17px,3vw,35px) "Saira Condensed",Barlow,sans-serif}
+.home-play small{font-size:clamp(9px,1.35vw,15px);color:#a7d9fa;letter-spacing:.04em}
+.home-play>b{font-size:27px}
+.home-mini{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#st .home-mini>button,.home-audio{display:flex;align-items:center;gap:8px;min-width:0;padding:10px;border:1px solid #8652b4;border-radius:13px;background:#15132bd9;backdrop-filter:blur(9px);box-shadow:0 4px 15px #0007}
+.home-mini>button>span{font-size:clamp(23px,3.5vw,39px)}
+.home-mini>button b{font-size:clamp(10px,1.6vw,17px)}
+.home-mini>button small{display:none}
+.home-audio{border-color:#68798a;flex-direction:column;align-items:stretch;justify-content:center}
+.home-audio label{font-size:12px;font-weight:800}
+.home-audio input{width:100%;margin:0}
+.home-footer{text-align:center;font-size:10px;letter-spacing:.2em;color:#b8c9db;flex-shrink:0}
+.home-footer span{color:#f54}
+@media(max-width:600px),(orientation:portrait){
+ #st #welcome.home-screen{padding:13px 12px;gap:10px;background-position:center}
+ .home-logo span{font-size:clamp(31px,9vw,49px)}.home-logo strong{font-size:clamp(36px,10vw,55px)}
+ .home-money{font-size:9px;padding:8px}
+ .home-layout{display:flex;flex-direction:column-reverse;align-items:stretch;justify-content:center;gap:12px;flex:1}
+ .home-actions{gap:9px}
+ #st .home-play{min-height:96px;padding:12px}
+ .home-play strong{font-size:clamp(20px,6vw,29px)}
+ .home-play small{font-size:10px}
+ .home-flag{font-size:34px}
+ .home-nav{gap:6px}
+ #st .home-nav button{min-height:41px;font-size:12px;padding:7px 11px}
+ #st .home-mini>button,.home-audio{padding:8px;min-height:44px}
+ .home-footer{font-size:9px}
+}
+@media(max-height:620px) and (orientation:portrait){
+ #st #welcome.home-screen{justify-content:flex-start}
+ .home-layout{justify-content:flex-start}
+ #st .home-nav button{min-height:36px}
+ #st .home-play{min-height:76px}
+ .home-footer{display:none}
+}
 </style></head><body>
 <div id="rotateHint" style="display:none">📱 Daha geniş oyun alanı için telefonu yatay çevir.</div><div id="st"><canvas id="c" width="960" height="720"></canvas><button id="sirenButton" type="button" aria-label="Polis sireni">🚨<small style="display:block;color:white">SİREN</small></button><button id="hornButton" type="button" aria-label="Korna"><svg viewBox="0 0 24 24" width="29" height="29" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h4l8 5V5l-8 5H4Z"/><path d="M19 9a4 4 0 0 1 0 6M21 6a8 8 0 0 1 0 12"/></svg></button><div id="displayTools"><button id="screenMode" type="button">↔ Yatay / Dikey</button></div><button id="pauseButton" type="button" style="position:absolute;z-index:16;top:9px;right:9px;display:none;background:#141b24e8;border-color:#ffb000">⏸ Duraklat</button><div id="pausePanel" class="ov hide" style="z-index:35;justify-content:center;align-items:center;text-align:center;background:#101820ee"><h1>⏸ OYUN DURAKLATILDI</h1><button class="big" id="resumeGame" style="width:85%">▶ Devam et</button><button id="pauseRestart" style="width:85%">↻ Yeniden başlat</button><div id="pauseControlRow" style="display:flex;width:85%;gap:8px;justify-content:center;flex-wrap:wrap"><button type="button" id="pauseButtons" style="flex:1;min-width:115px">◀ ▶ Tuşlar</button><button type="button" id="pauseWheel" style="flex:1;min-width:115px">◉ Direksiyon</button></div><button id="pauseMenu" style="width:85%">⌂ Ana menüye dön</button></div><div id="catchOverlay">🚨 POLİS GELİYOR!</div>
-<div id="welcome" class="ov" style="justify-content:center;text-align:center;align-items:center;background:linear-gradient(160deg,#12171d,#303943)"><div style="font-size:4em">🏎️</div><h1 style="font-size:3.5em;color:#ffb000">OTOBAN<br>MAKAS</h1><small>TRAFİĞİN RİTMİNİ YAKALA</small><button class="big" id="welcomePlay" style="width:85%;margin-top:2em">▶ OYNA</button><button id="welcomeGarage" style="width:85%">🚗 GARAJ • ARAÇLARIM</button><button id="dailyRewardsOpen" style="width:85%">🎁 GÜNLÜK ÖDÜLLER & ÇARK</button><button id="shopOpen" style="width:85%">🛒 MAĞAZA • ALTINLA PARA AL</button><button id="missionsOpen" style="width:85%">🎯 GÖREVLER</button><button id="statsOpen" style="width:85%">📊 İSTATİSTİKLER</button><button id="leaderOpen" style="width:85%">🏆 LİDERLİK TABLOSU</button><div style="width:85%;display:flex;align-items:center;gap:8px"><small>🔊 Ses</small><input id="volume" type="range" min="0" max="1.5" step="0.1" value="1" style="flex:1"></div><small>Yeni garaj • yeni araçlar • puan sistemi</small></div>
+<div id="welcome" class="ov home-screen">
+ <div class="home-top"><div class="home-logo"><span>OTOBAN</span><strong>MAKAS <em>2D</em></strong></div><div class="home-money">🏆 <span id="homeCash">OTOBAN MAKAS</span></div></div>
+ <div class="home-layout">
+  <div class="home-nav">
+   <button id="welcomeGarage">🚘 <span>ARAÇLAR VE YÜKSELTMELER</span><b>❯</b></button>
+   <button id="shopOpen">🛒 <span>MAĞAZA</span><b>❯</b></button>
+   <button id="statsOpen">📊 <span>İSTATİSTİKLER</span><b>❯</b></button>
+   <button id="leaderOpen">🏆 <span>LİDERLİK TABLOSU</span><b>❯</b></button>
+   <button id="missionsOpen">🎯 <span>GÖREVLER</span><b>❯</b></button>
+  </div>
+  <div class="home-actions">
+   <button class="home-play" id="welcomePlay"><span class="home-flag">🏁</span><span><strong>OYUN MODU SEÇ</strong><small>İSTEDİĞİN MODU SEÇ VE YOLA ÇIK</small></span><b>❯</b></button>
+   <div class="home-mini"><button id="dailyRewardsOpen"><span>🎁</span><b>GÜNLÜK ÖDÜL</b><small>Çarkı çevir, ödülünü al</small></button><div class="home-audio"><label for="volume">🔊 SES</label><input id="volume" type="range" min="0" max="1.5" step="0.1" value="1"></div></div>
+  </div>
+ </div>
+ <div class="home-footer">OTOBAN MAKAS 2D <span>•</span> YOL SENİN</div>
+</div>
 <div id="modeSelect" class="ov hide" style="z-index:60;background:#101720;overflow:hidden;padding:0">
 <div class="mode-grid">
 <button class="mode-tile" data-choice="career"><span class="mode-icon">🏁</span><b>KARİYER</b><small>250 bölüm · 10’arlı sayfalar</small></button>
