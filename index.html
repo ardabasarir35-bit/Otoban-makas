@@ -273,7 +273,7 @@ small{color:var(--mut);line-height:1.35}
 <div id="steeringWheel" role="slider" aria-label="Direksiyon" aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"><div class="spoke"></div><div class="spoke vertical"></div><div class="hub">●</div></div><div id="gp"><button data-g="1">Vites +</button><button data-g="-1">Vites −</button></div><div id="pad"><div><button data-k="left">◀</button><button data-k="right">▶</button></div><div><button data-k="nit" aria-label="Nitro" title="Nitro">⚡</button><button data-k="down">Fren</button><button data-k="up">Gaz</button></div></div>
 </div>
 <script>
-const OX=60,W=440,H=720,K=3.2,RL=20,PY=570,$=id=>document.getElementById(id);
+const OX=60,W=440,H=720,K=3.2,RL=48,PY=570,$=id=>document.getElementById(id);
 const cv=$('c'),g=cv.getContext('2d'),LX=l=>85+90*l;
 const TY={mini:[34,58],hatch:[38,66],sedan:[40,78],van:[44,92],kamyonet:[46,88],motor:[23,52],tir:[50,106],coupe:[40,76],super:[44,82],albea:[42,82],laguna:[41,78],retro:[43,65],pickup:[49,94],roadster:[44,69],muscle:[48,83],rally:[43,74],electric:[43,79],police:[49,91],wagon:[46,89]};
 const CARS=[
@@ -805,8 +805,8 @@ function clearTrafficForHorn(){
 function road(){scenery();g.translate(OX,0);const tl=tile(S.sea);for(let y=off-80;y<H;y+=80)g.drawImage(tl,0,y);
 const asphaltLight=g.createLinearGradient(0,0,W,0);asphaltLight.addColorStop(0,'rgba(0,0,0,.27)');asphaltLight.addColorStop(.22,'rgba(255,255,255,.035)');asphaltLight.addColorStop(.5,'rgba(0,0,0,.075)');asphaltLight.addColorStop(.78,'rgba(255,255,255,.035)');asphaltLight.addColorStop(1,'rgba(0,0,0,.27)');g.fillStyle=asphaltLight;g.fillRect(RL,0,W-2*RL,H);
  g.fillStyle='#b9b4a6';g.fillRect(0,0,RL,H);g.fillRect(W-RL,0,RL,H);
-g.fillStyle='#c8372d';for(let y=off-80;y<H;y+=80){g.fillRect(0,y,RL-4,40);g.fillRect(W-RL+4,y,RL-4,40)}
-g.fillStyle='#8a8678';g.fillRect(RL-3,0,3,H);g.fillRect(W-RL,0,3,H);
+g.fillStyle='#c8372d';for(let y=off-80;y<H;y+=80){g.fillRect(RL-15,y,12,40);g.fillRect(W-RL+3,y,12,40)}
+g.fillStyle='#8a8678';g.fillRect(RL-3,0,3,H);g.fillRect(W-RL,0,3,H);g.fillStyle='rgba(255,255,255,.23)';g.fillRect(RL+2,0,2,H);g.fillRect(W-RL-4,0,2,H);
 g.fillStyle='rgba(255,255,255,.025)';for(let i=0;i<4;i++)if(i%2===0)g.fillRect(40+i*90,0,90,H);g.fillStyle='#ece7d6';const xs=S.mode=='2'?[130,310]:[130,220,310];
 for(const x of xs)for(let y=off-80;y<H;y+=80)g.fillRect(x-2,y,4,40);
 if(S.mode=='2'){g.fillStyle='#ffb000';g.fillRect(216,0,3,H);g.fillRect(221,0,3,H)}if(S.sea==3){g.fillStyle='rgba(255,255,255,.85)';g.fillRect(0,0,7,H);g.fillRect(W-7,0,7,H)}}
