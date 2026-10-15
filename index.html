@@ -1,4 +1,4 @@
-<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="mobile-web-app-capable" content="yes"><title>Otoban Makas</title>
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="mobile-web-app-capable" content="yes"><title>Otoban Makas</title>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;800&family=Barlow:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#14171a;--ink:#ece7d6;--amb:#ffb000;--red:#c8372d;--grn:#3ddc97;--mut:#8c93a0;--pan:#1e2227;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -328,6 +328,15 @@ small{color:var(--mut);line-height:1.35}
 // Cift tiklamadan kaynaklanan varsayilan tarayici yakinlastirmasini engelle.
 // Tek dokunma, tiklama ve oyun kontrol tuslarinin davranisi degismez.
 document.getElementById('st').addEventListener('dblclick',event=>event.preventDefault());
+/* iOS Safari: ikinci parmak sabitken diger parmakla cift dokunma ve pinch
+   tarayici yakinlastirmasini baslatmasin. Kontrol tuslarinin touchstart/
+   touchend olaylarini engellemiyoruz; eszamanli tuslar calismaya devam eder. */
+for(const type of ['gesturestart','gesturechange','gestureend']){
+ document.addEventListener(type,event=>{if(event.cancelable)event.preventDefault()},{passive:false});
+}
+document.getElementById('st').addEventListener('touchmove',event=>{
+ if(event.touches.length>1&&event.cancelable)event.preventDefault();
+},{passive:false});
 
 const OX=60,W=440,H=720,K=3.2,RL=48,PY=570,$=id=>document.getElementById(id);
 const cv=$('c'),g=cv.getContext('2d'),LX=l=>85+90*l;
