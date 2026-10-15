@@ -1002,7 +1002,7 @@ $('modeSelect').onclick=e=>{const b=e.target.closest('[data-choice]');if(!b)retu
 $('tankReadyBack').onclick=()=>{$('tankReady').classList.add('hide');$('modeSelect').classList.remove('hide')};
 $('tankStartNow').onclick=()=>{if(tankRemaining())return;S.gameMode='tank';save();$('tankReady').classList.add('hide');$('welcome').classList.add('hide');start()};
 $('nextStep').onclick=()=>{if(menuStep===0&&S.career.returnToCareer){S.career.returnToCareer=false;$('menu').classList.add('hide');openCareer();return;}setStep(menuStep+1)};$('backStep').onclick=()=>{if(menuStep===0){$('menu').classList.add('hide');if(S.career.returnToCareer){S.career.returnToCareer=false;openCareer()}else $('welcome').classList.remove('hide')}else setStep(menuStep-1)};
-const PAINT_COLORS=['#f2f2f2','#20242a','#c8372d','#4aa3df','#3ddc97','#ffb000','#a36de0','#f16c7c','#8d9299','#2f4d78'];
+const PAINT_COLORS=['#f2f2f2','#20242a','#c8372d','#4aa3df','#3ddc97','#ffb000','#a36de0','#f16c7c','#8d9299','#2f4d78','#FFCBDB'];
 let pendingPaint=null,paintingCar=null;
 function drawPaintPreview(){const cv=$('paintPreview'),ctx=cv.getContext('2d'),c=CARS[paintingCar],d=TY[c.type];ctx.clearRect(0,0,cv.width,cv.height);ctx.save();ctx.translate(20,6);ctx.scale(1.8,1.55);drawCar(ctx,{x:40,y:63,w:d[0],h:d[1],dir:1,type:c.type,col:pendingPaint,t:0});ctx.restore()}
 function openPaintModal(){paintingCar=bi;pendingPaint=paintColor(bi);$('paintCarName').textContent=CARS[bi].n;$('paintError').textContent='';$('paintModal').classList.remove('hide');renderPaintChoices()}
